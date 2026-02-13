@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Applications | Support Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600&family=Inter:wght@400;500;600&display=swap');
+        
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: #fcfcfc;
+            color: #1a1a1a;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .nav-link {
+            font-size: 0.9rem;
+            color: #4b5563;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-link:hover {
+            color: #2563eb;
+        }
+
+        .app-card {
+            transition: all 0.2s ease;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+
+        .app-card:hover {
+            background-color: #f3f4f6;
+        }
+
+        .section-title {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            font-weight: 400;
+        }
+
+        .search-container {
+            position: relative;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6b7280;
+        }
+
+        .search-input {
+            padding-left: 40px;
+            border: 1px solid #e5e7eb;
+            transition: border-color 0.2s;
+        }
+
+        .search-input:focus {
+            border-color: #2563eb;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1);
+        }
+
+        .status-btn {
+            background-color: #2563eb;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 9999px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: opacity 0.2s;
+            box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
+        }
+
+        .status-btn:hover {
+            opacity: 0.9;
+        }
+
+        /* Support Icon Custom Styles */
+        .icon-support {
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background-color: white;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        footer {
+            margin-top: auto;
+            border-top: 1px solid #e5e7eb;
+            background-color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="bg-white border-b border-gray-100 px-4 md:px-8 py-4 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <div class="flex items-center gap-8">
+                <!-- Branding -->
+                <div class="flex items-center gap-2 cursor-pointer" onclick="location.reload()">
+                    <span class="font-bold text-lg tracking-tight">Portal</span>
+                </div>
+                
+                <!-- Desktop Links -->
+                <div class="hidden md:flex items-center gap-6">
+                    <a href="" class="nav-link">Home</a>
+                    <a href="" class="nav-link text-blue-600">Applications</a>
+                    <a href="#" class="nav-link">Resources</a>
+                    <a href="" class="nav-link">Help</a>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-4">
+                <a href="" class="px-8 py-3 bg-blue-600 text-white text-xs font-black uppercase tracking-widest rounded hover:bg-blue-700 transition shadow-lg shadow-blue-200">
+                        Support Status
+                    </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="p-4 md:p-8 flex-grow">
+        <div class="max-w-7xl mx-auto">
+            
+            <div class="mb-8">
+                <h1 class="text-2xl font-semibold section-title">Applications</h1>
+                <p class="text-gray-500 text-sm mt-1 text-blue-600">Welcome to your central application dashboard.</p>
+            </div>
+
+            <!-- Search Bar -->
+            <div class="search-container mb-12">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" id="appSearch" placeholder="Search applications..." class="w-full py-3 rounded-lg search-input text-sm">
+                <div class="absolute right-3 top-1/2 -translate-y-1/2 flex gap-4 text-gray-400">
+                </div>
+            </div>
+
+            <!-- Microsoft 365 Section -->
+            <div id="m365Section" class="mb-16">
+                <h2 class="text-xl section-title mb-8 flex items-center gap-2">
+                    <i class="fas fa-cloud text-blue-500 text-sm"></i>
+                    Microsoft 365
+                </h2>
+                <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 gap-y-10 gap-x-4" id="m365Grid">
+                    <!-- Apps injected by JS -->
+                </div>
+            </div>
+
+            <!-- Support Section -->
+            <div id="supportSection" class="mb-12">
+                <h2 class="text-xl section-title mb-8 flex items-center gap-2">
+                    <i class="fas fa-headset text-blue-500 text-sm"></i>
+                    Support
+                </h2>
+                <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 gap-y-10 gap-x-4" id="supportGrid">
+                    <!-- Support Apps injected by JS -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-8 px-4 md:px-8">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500">
+            <div class="flex items-center gap-4">
+                <span>© 2024 Support Portal</span>
+                <span class="hidden md:inline">|</span>
+                <a href="#" class="hover:text-blue-600">Privacy Policy</a>
+                <a href="#" class="hover:text-blue-600">Terms of Use</a>
+            </div>
+            <div class="flex items-center gap-6">
+               
+                <div class="flex gap-4 text-gray-400">
+                    <i class="fab fa-twitter cursor-pointer hover:text-blue-400"></i>
+                    <i class="fab fa-linkedin cursor-pointer hover:text-blue-700"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const m365Apps = [
+            { name: "Bookings", icon: "https://res.cdn.office.net/midgard/versionless/fluentui-resources/1.1.6/assets/brand-icons/product/svg/bookings_24x1.svg", url: "https://outlook.office.com/bookings/" },
+            { name: "Calendar", icon: "https://res.cdn.office.net/midgard/versionless/fluentui-resources/1.1.6/assets/brand-icons/product/svg/calendar_24x1.svg", url: "https://outlook.office.com/calendar/" },
+            { name: "Excel", icon: "https://res.cdn.office.net/midgard/versionless/fluentui-resources/1.1.6/assets/brand-icons/product/svg/excel_24x1.svg", url: "https://www.office.com/launch/excel" },
+            { name: "Forms", icon: "https://res.cdn.office.net/midgard/versionless/fluentui-resources/1.1.6/assets/brand-icons/product/svg/forms_24x1.svg", url: "https://forms.office.com/" },
+            { name: "OneDrive", icon: "https://res.cdn.office.net/midgard/versionless/fluentui-resources/1.1.6/assets/brand-icons/product/svg/onedrive_24x1.svg", url: "https://onedrive.live.com/" },
+            { name: "OneNote", icon: "https://res.cdn.office.net/midgard/versionless/fluentui-resources/1.1.6/assets/brand-icons/product/svg/onenote_24x1.svg", url: "https://www.onenote.com/" },
+            { name: "Outlook", icon: "https://res.cdn.office.net/midgard/versionless/fluentui-resources/1.1.6/assets/brand-icons/product/svg/outlook_24x1.svg", url: "https://outlook.office.com/" },
+            { name: "Planner", icon: "https://res.cdn.office.net/midgard/versionless/fluentui-resources/1.1.6/assets/brand-icons/product/svg/planner_24x1.svg", url: "https://tasks.office.com/" },
+            { name: "Power Automate", icon: "https://res.cdn.office.net/midgard/versionless/fluentui-resources/1.1.6/assets/brand-icons/product/svg/powerautomate_24x1.svg", url: "https://make.powerautomate.com/" },
+            { name: "Power BI", icon: "https://res.cdn.office.net/midgard/versionless/fluentui-resources/1.1.6/assets/brand-icons/product/svg/powerbi_24x1.svg", url: "https://app.powerbi.com/" },
+            { name: "PowerPoint", icon: "https://res.cdn.office.net/midgard/versionless/fluentui-resources/1.1.6/assets/brand-icons/product/svg/powerpoint_24x1.svg", url: "https://www.office.com/launch/powerpoint" },
+            { name: "SharePoint", icon: "https://res.cdn.office.net/midgard/versionless/fluentui-resources/1.1.6/assets/brand-icons/product/svg/sharepoint_24x1.svg", url: "https://www.office.com/launch/sharepoint" },
+            { name: "Teams", icon: "https://res.cdn.office.net/midgard/versionless/fluentui-resources/1.1.6/assets/brand-icons/product/svg/teams_24x1.svg", url: "https://teams.microsoft.com/" },
+            { name: "Word", icon: "https://res.cdn.office.net/midgard/versionless/fluentui-resources/1.1.6/assets/brand-icons/product/svg/word_24x1.svg", url: "https://www.office.com/launch/word" }
+        ];
+
+        const supportApps = [
+            { name: "Report a Problem", iconClass: "fa-life-ring", color: "text-rose-600", url: "index.html" },
+            { name: "Request Service", iconClass: "fa-clipboard-list", color: "text-blue-500", url: "index.html" },
+            { name: "Ticket Updates", iconClass: "fa-ticket-alt", color: "text-slate-800", url: "index.html" }
+        ];
+
+        function createAppCard(app, isSupport = false) {
+            const card = document.createElement('div');
+            card.className = 'app-card flex flex-col items-center text-center p-2 group';
+            card.onclick = () => window.open(app.url, '_blank');
+            
+            let iconHtml = '';
+            if (isSupport) {
+                iconHtml = `
+                    <div class="icon-support mb-3 group-hover:scale-110 transition-transform">
+                        <i class="fas ${app.iconClass} ${app.color} text-xl"></i>
+                    </div>
+                `;
+            } else {
+                iconHtml = `<img src="${app.icon}" alt="${app.name}" class="w-12 h-12 mb-3 object-contain group-hover:scale-110 transition-transform" onerror="this.src='https://via.placeholder.com/48?text=App'">`;
+            }
+
+            card.innerHTML = `
+                ${iconHtml}
+                <span class="text-[11px] font-medium leading-tight text-gray-700">${app.name}</span>
+            `;
+            return card;
+        }
+
+        function renderApps(filter = "") {
+            const m365Grid = document.getElementById('m365Grid');
+            const supportGrid = document.getElementById('supportGrid');
+            const m365Section = document.getElementById('m365Section');
+            const supportSection = document.getElementById('supportSection');
+
+            m365Grid.innerHTML = "";
+            supportGrid.innerHTML = "";
+
+            const filteredM365 = m365Apps.filter(app => app.name.toLowerCase().includes(filter.toLowerCase()));
+            const filteredSupport = supportApps.filter(app => app.name.toLowerCase().includes(filter.toLowerCase()));
+
+            filteredM365.forEach(app => m365Grid.appendChild(createAppCard(app)));
+            filteredSupport.forEach(app => supportGrid.appendChild(createAppCard(app, true)));
+
+            m365Section.style.display = filteredM365.length ? "block" : "none";
+            supportSection.style.display = filteredSupport.length ? "block" : "none";
+        }
+
+        document.getElementById('appSearch').addEventListener('input', (e) => {
+            renderApps(e.target.value);
+        });
+
+        renderApps();
+    </script>
+</body>
+</html>
