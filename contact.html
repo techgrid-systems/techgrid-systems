@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | Tech Velocity</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800;900&display=swap');
+        
+        body { font-family: 'Inter', sans-serif; overflow-x: hidden; }
+
+        /* Focus States for Accessibility */
+        :focus-visible {
+            outline: 3px solid #2563eb !important;
+            outline-offset: 2px;
+        }
+
+        /* Desktop Dropdown Hover */
+        @media (min-width: 768px) {
+            .dropdown:hover .dropdown-menu {
+                display: block;
+                animation: fadeIn 0.15s ease-out;
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Mobile Menu Container */
+        #mobile-menu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.4s;
+            visibility: hidden;
+        }
+        #mobile-menu.open {
+            max-height: 100vh;
+            visibility: visible;
+        }
+
+        /* Mobile Dropdown Accordion */
+        .mobile-dropdown-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        .mobile-dropdown-content.active {
+            max-height: 500px;
+        }
+        
+        /* Icon Rotations */
+        .rotate-icon {
+            transition: transform 0.3s ease;
+        }
+        .rotated {
+            transform: rotate(180deg);
+        }
+
+        /* Hamburger Animation */
+        .hamburger-line {
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            transform-origin: center;
+        }
+        .menu-open .line-1 { transform: translateY(6px) rotate(45deg); }
+        .menu-open .line-2 { opacity: 0; }
+        .menu-open .line-3 { transform: translateY(-6px) rotate(-45deg); }
+
+        html { scroll-behavior: smooth; }
+        
+        input:focus, textarea:focus, select:focus {
+            outline: 2px solid #2563eb !important;
+            outline-offset: -2px;
+        }
+    </style>
+</head>
+<body class="bg-white text-slate-900">
+
+    <!-- NAVIGATION -->
+    <nav class="bg-white border-b border-slate-100 sticky top-0 z-50" aria-label="Main Navigation">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex justify-between items-center h-20">
+                
+                <!-- Logo -->
+                <a href="https://supportvelocity.github.io/support-velocity/" class="flex items-center cursor-pointer" aria-label="Tech Velocity Home">
+                    <span class="text-xl italic font-black tracking-tighter text-slate-900 uppercase">
+                        TECH<span class="text-blue-600">VELOCITY</span>
+                    </span>
+                </a>
+
+                <!-- Desktop Nav -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#" class="text-sm font-bold uppercase tracking-widest hover:text-blue-600 transition">Home</a>
+                    
+                    <div class="relative dropdown h-20 flex items-center">
+                        <button aria-haspopup="true" aria-expanded="false" class="text-sm font-bold uppercase tracking-widest flex items-center hover:text-blue-600 transition">
+                            Services <svg class="ml-1.5 h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div class="dropdown-menu hidden absolute top-[80px] left-0 w-64 bg-white border border-slate-100 shadow-2xl py-2 z-50">
+                            <a href="#" class="block px-6 py-3 text-xs font-black uppercase tracking-widest hover:bg-blue-50 hover:text-blue-600 transition">Cloud Systems</a>
+                            <a href="#" class="block px-6 py-3 text-xs font-black uppercase tracking-widest hover:bg-blue-50 hover:text-blue-600 transition">Managed IT Support</a>
+                            <a href="#" class="block px-6 py-3 text-xs font-black uppercase tracking-widest hover:bg-blue-50 hover:text-blue-600 transition">Infrastructure</a>
+                            <a href="#" class="block px-6 py-3 text-xs font-black uppercase tracking-widest hover:bg-blue-50 hover:text-blue-600 transition">Networking</a>
+                            <a href="#" class="block px-6 py-3 text-xs font-black uppercase tracking-widest hover:bg-blue-50 hover:text-blue-600 transition">Web Development</a>
+                        </div>
+                    </div>
+
+                    <div class="relative dropdown h-20 flex items-center">
+                        <button aria-haspopup="true" aria-expanded="false" class="text-sm font-bold uppercase tracking-widest flex items-center hover:text-blue-600 transition">
+                            Insights <svg class="ml-1.5 h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div class="dropdown-menu hidden absolute top-[80px] left-0 w-56 bg-white border border-slate-100 shadow-2xl py-2 z-50">
+                            <a href="#" class="block px-6 py-3 text-xs font-black uppercase tracking-widest hover:bg-blue-50 hover:text-blue-600 transition">Blog</a>
+                            <a href="#" class="block px-6 py-3 text-xs font-black uppercase tracking-widest hover:bg-blue-50 hover:text-blue-600 transition">Case Studies</a>
+                        </div>
+                    </div>
+
+                    <div class="relative dropdown h-20 flex items-center">
+                        <button aria-haspopup="true" aria-expanded="false" class="text-sm font-bold uppercase tracking-widest flex items-center hover:text-blue-600 transition">
+                            About <svg class="ml-1.5 h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div class="dropdown-menu hidden absolute top-[80px] left-0 w-56 bg-white border border-slate-100 shadow-2xl py-2 z-50">
+                            <a href="#" class="block px-6 py-3 text-xs font-black uppercase tracking-widest hover:bg-blue-50 hover:text-blue-600 transition">About Us</a>
+                            <a href="#" class="block px-6 py-3 text-xs font-black uppercase tracking-widest hover:bg-blue-50 hover:text-blue-600 transition">Meet The Team</a>
+                            <a href="#" class="block px-6 py-3 text-xs font-black uppercase tracking-widest hover:bg-blue-50 hover:text-blue-600 transition">Careers</a>
+                        </div>
+                    </div>
+
+                    <a href="/support-velocity/support/" class="px-8 py-3 bg-blue-600 text-white text-xs font-black uppercase tracking-widest rounded hover:bg-blue-700 transition shadow-lg shadow-blue-200">
+                        Support
+                    </a>
+                </div>
+
+                <!-- Mobile Hamburger Button -->
+                <button id="mobile-toggle" aria-label="Open Menu" aria-expanded="false" aria-controls="mobile-menu" class="md:hidden text-slate-900 p-2 focus:outline-none flex flex-col justify-center items-center w-10 h-10 space-y-1">
+                    <span class="hamburger-line line-1 w-6 h-0.5 bg-current rounded-full"></span>
+                    <span class="hamburger-line line-2 w-6 h-0.5 bg-current rounded-full"></span>
+                    <span class="hamburger-line line-3 w-6 h-0.5 bg-current rounded-full"></span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden bg-white border-t border-slate-100">
+            <div class="px-6 py-8 space-y-6">
+                <a href="#" class="block text-sm font-black uppercase tracking-widest text-slate-900">Home</a>
+                
+                <!-- Services -->
+                <div class="space-y-2">
+                    <button onclick="toggleMobileDropdown('mob-services', 'icon-services')" aria-expanded="false" aria-controls="mob-services" class="w-full flex justify-between items-center text-sm font-black uppercase tracking-widest text-slate-900">
+                        Services 
+                        <svg id="icon-services" class="h-4 w-4 rotate-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div id="mob-services" class="mobile-dropdown-content flex flex-col space-y-4 pl-4 border-l-2 border-slate-100 mt-2">
+                        <a href="#" class="text-slate-500 font-bold text-sm pt-2">Cloud Systems</a>
+                        <a href="#" class="text-slate-500 font-bold text-sm">Managed IT Support</a>
+                        <a href="#" class="text-slate-500 font-bold text-sm">Infrastructure</a>
+                        <a href="#" class="text-slate-500 font-bold text-sm">Networking</a>
+                        <a href="#" class="text-slate-500 font-bold text-sm pb-2">Web Development</a>
+                    </div>
+                </div>
+
+                <!-- Insights -->
+                <div class="space-y-2">
+                    <button onclick="toggleMobileDropdown('mob-insights', 'icon-insights')" aria-expanded="false" aria-controls="mob-insights" class="w-full flex justify-between items-center text-sm font-black uppercase tracking-widest text-slate-900">
+                        Insights 
+                        <svg id="icon-insights" class="h-4 w-4 rotate-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div id="mob-insights" class="mobile-dropdown-content flex flex-col space-y-4 pl-4 border-l-2 border-slate-100 mt-2">
+                        <a href="#" class="text-slate-500 font-bold text-sm pt-2">Blog</a>
+                        <a href="#" class="text-slate-500 font-bold text-sm pb-2">Case Studies</a>
+                    </div>
+                </div>
+
+                <!-- About -->
+                <div class="space-y-2">
+                    <button onclick="toggleMobileDropdown('mob-about', 'icon-about')" aria-expanded="false" aria-controls="mob-about" class="w-full flex justify-between items-center text-sm font-black uppercase tracking-widest text-slate-900">
+                        About 
+                        <svg id="icon-about" class="h-4 w-4 rotate-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div id="mob-about" class="mobile-dropdown-content flex flex-col space-y-4 pl-4 border-l-2 border-slate-100 mt-2">
+                        <a href="#" class="text-slate-500 font-bold text-sm pt-2">About Us</a>
+                        <a href="#" class="text-slate-500 font-bold text-sm">Meet The Team</a>
+                        <a href="#" class="text-slate-500 font-bold text-sm pb-2">Careers</a>
+                    </div>
+                </div>
+
+                <a href="/support/" class="block w-full py-5 bg-blue-600 text-white text-center font-black uppercase tracking-widest rounded shadow-xl shadow-blue-200">Support Center</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT AREA -->
+    <main id="main-content">
+        <section class="py-20 px-6 bg-slate-50 min-h-screen">
+            <div class="max-w-7xl mx-auto">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+                    
+                    <!-- Left Side: Contact Info -->
+                    <div>
+                        <h1 class="text-5xl md:text-7xl font-black uppercase tracking-tighter italic mb-8 leading-[0.9]">
+                            Let’s work together to <span class="text-blue-600">make technology work.</span>
+                        </h1>
+                        <p class="text-slate-600 text-lg md:text-xl font-medium mb-10 max-w-xl">
+                            Let’s focus on your specific challenges and find solutions that keep your technology working for you, instead of becoming an obstacle.
+                        </p>
+
+                        <div class="bg-white border border-slate-200 p-8 mb-12 shadow-sm">
+                            <p class="text-slate-900 font-bold mb-2">Already an existing customer and looking to log a ticket?</p>
+                            <a href="/support-velocity/support/" class="text-blue-600 font-black uppercase tracking-widest text-sm hover:text-blue-800 transition flex items-center">
+                                Click here <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                            </a>
+                        </div>
+
+                        <div class="space-y-10">
+                            <div>
+                                <h3 class="text-blue-600 text-[10px] font-black uppercase tracking-[0.2em] mb-4">For all enquiries</h3>
+                                <a href="tel:01268288100" class="text-4xl md:text-5xl font-black tracking-tighter hover:text-blue-600 transition">01268 288100</a>
+                            </div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-y-8 gap-x-12">
+                                <div>
+                                    <h4 class="text-slate-400 text-[10px] font-black uppercase tracking-widest mb-2">General</h4>
+                                    <a href="mailto:info@arcsystems.co.uk" class="text-lg font-bold hover:text-blue-600 transition underline decoration-slate-200 underline-offset-4">info@arcsystems.co.uk</a>
+                                </div>
+                                <div>
+                                    <h4 class="text-slate-400 text-[10px] font-black uppercase tracking-widest mb-2">Sales</h4>
+                                    <a href="mailto:arc.sales@arcsystems.co.uk" class="text-lg font-bold hover:text-blue-600 transition underline decoration-slate-200 underline-offset-4">arc.sales@arcsystems.co.uk</a>
+                                </div>
+                                <div>
+                                    <h4 class="text-slate-400 text-[10px] font-black uppercase tracking-widest mb-2">Support</h4>
+                                    <a href="mailto:helpdesk@arcsystems.co.uk" class="text-lg font-bold hover:text-blue-600 transition underline decoration-slate-200 underline-offset-4">helpdesk@arcsystems.co.uk</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Side: Contact Form -->
+                    <div class="bg-white p-8 md:p-12 shadow-2xl shadow-slate-200 rounded-sm border border-slate-100">
+                        <form action="#" method="POST" class="space-y-6">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div class="space-y-2">
+                                    <label for="full-name" class="text-[10px] font-black uppercase tracking-widest text-slate-500">Full Name</label>
+                                    <input type="text" id="full-name" name="name" placeholder="John Doe" required class="w-full px-4 py-4 bg-slate-50 border border-slate-200 focus:bg-white transition font-medium">
+                                </div>
+                                <div class="space-y-2">
+                                    <label for="email" class="text-[10px] font-black uppercase tracking-widest text-slate-500">Email Address</label>
+                                    <input type="email" id="email" name="email" placeholder="john@company.com" required class="w-full px-4 py-4 bg-slate-50 border border-slate-200 focus:bg-white transition font-medium">
+                                </div>
+                            </div>
+
+                            <div class="space-y-2">
+                                <label for="company" class="text-[10px] font-black uppercase tracking-widest text-slate-500">Company Name</label>
+                                <input type="text" id="company" name="company" placeholder="Enter company name" class="w-full px-4 py-4 bg-slate-50 border border-slate-200 focus:bg-white transition font-medium">
+                            </div>
+
+                            <div class="space-y-2">
+                                <label for="service" class="text-[10px] font-black uppercase tracking-widest text-slate-500">Nature of Inquiry</label>
+                                <div class="relative">
+                                    <select id="service" name="service" class="w-full px-4 py-4 bg-slate-50 border border-slate-200 focus:bg-white transition font-medium appearance-none cursor-pointer">
+                                        <option>Managed IT Support</option>
+                                        <option>Cloud Infrastructure</option>
+                                        <option>Cyber Security</option>
+                                        <option>Other Enquiry</option>
+                                    </select>
+                                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-400">
+                                        <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="space-y-2">
+                                <label for="message" class="text-[10px] font-black uppercase tracking-widest text-slate-500">Your Message</label>
+                                <textarea id="message" name="message" rows="5" placeholder="How can we help?" required class="w-full px-4 py-4 bg-slate-50 border border-slate-200 focus:bg-white transition font-medium resize-none"></textarea>
+                            </div>
+
+                            <button type="submit" class="w-full py-5 bg-blue-600 text-white text-xs font-black uppercase tracking-[0.2em] rounded hover:bg-blue-700 transition shadow-xl shadow-blue-200">
+                                Submit Request
+                            </button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-[#030712] text-white pt-24 pb-12 relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="mb-20">
+                <h4 class="text-2xl italic font-black tracking-tighter uppercase mb-6">TECH<span class="text-blue-600">VELOCITY</span></h4>
+                <p class="text-slate-500 text-sm font-medium leading-relaxed max-w-sm">
+                    High-momentum IT infrastructure, security, and 
