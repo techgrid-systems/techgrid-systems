@@ -86,6 +86,27 @@
                         </div>
                     </div>
 
+                    <div class="relative dropdown h-20 flex items-center">
+                        <button class="text-sm font-bold uppercase tracking-widest flex items-center hover:text-blue-600 transition">
+                            Insights <svg class="ml-1.5 h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div class="dropdown-menu hidden absolute top-[80px] left-0 w-56 bg-white border border-slate-100 shadow-2xl py-2 z-50">
+                            <a href="#" class="block px-6 py-3 text-xs font-black uppercase tracking-widest hover:bg-blue-50 hover:text-blue-600 transition">Blog</a>
+                            <a href="#" class="block px-6 py-3 text-xs font-black uppercase tracking-widest hover:bg-blue-50 hover:text-blue-600 transition">Case Studies</a>
+                        </div>
+                    </div>
+
+                    <div class="relative dropdown h-20 flex items-center">
+                        <button class="text-sm font-bold uppercase tracking-widest flex items-center hover:text-blue-600 transition">
+                            About <svg class="ml-1.5 h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div class="dropdown-menu hidden absolute top-[80px] left-0 w-56 bg-white border border-slate-100 shadow-2xl py-2 z-50">
+                            <a href="#" class="block px-6 py-3 text-xs font-black uppercase tracking-widest hover:bg-blue-50 hover:text-blue-600 transition">About Us</a>
+                            <a href="#" class="block px-6 py-3 text-xs font-black uppercase tracking-widest hover:bg-blue-50 hover:text-blue-600 transition">Meet The Team</a>
+                            <a href="#" class="block px-6 py-3 text-xs font-black uppercase tracking-widest hover:bg-blue-50 hover:text-blue-600 transition">Careers</a>
+                        </div>
+                    </div>
+
                     <a href="/support-velocity/support/" class="px-8 py-3 bg-blue-600 text-white text-xs font-black uppercase tracking-widest rounded hover:bg-blue-700 transition shadow-lg shadow-blue-200">
                         Support
                     </a>
@@ -100,6 +121,44 @@
         <div id="mobile-menu" class="md:hidden bg-white border-t border-slate-100">
             <div class="px-6 py-8 space-y-6">
                 <a href="#" class="block text-sm font-black uppercase tracking-widest text-slate-900">Home</a>
+                
+                <div class="space-y-2">
+                    <button onclick="toggleMobileDropdown('mob-services', 'icon-services')" class="w-full flex justify-between items-center text-sm font-black uppercase tracking-widest text-slate-900">
+                        Services 
+                        <svg id="icon-services" class="h-4 w-4 rotate-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div id="mob-services" class="mobile-dropdown-content flex flex-col space-y-4 pl-4 border-l-2 border-slate-100 mt-2">
+                        <a href="#" class="text-slate-500 font-bold text-sm pt-2">Cloud Systems</a>
+                        <a href="#" class="text-slate-500 font-bold text-sm">Managed IT Support</a>
+                        <a href="#" class="text-slate-500 font-bold text-sm">Infrastructure</a>
+                        <a href="#" class="text-slate-500 font-bold text-sm">Networking</a>
+                        <a href="#" class="text-slate-500 font-bold text-sm pb-2">Web Development</a>
+                    </div>
+                </div>
+
+                <div class="space-y-2">
+                    <button onclick="toggleMobileDropdown('mob-insights', 'icon-insights')" class="w-full flex justify-between items-center text-sm font-black uppercase tracking-widest text-slate-900">
+                        Insights 
+                        <svg id="icon-insights" class="h-4 w-4 rotate-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div id="mob-insights" class="mobile-dropdown-content flex flex-col space-y-4 pl-4 border-l-2 border-slate-100 mt-2">
+                        <a href="#" class="text-slate-500 font-bold text-sm pt-2">Blog</a>
+                        <a href="#" class="text-slate-500 font-bold text-sm pb-2">Case Studies</a>
+                    </div>
+                </div>
+
+                <div class="space-y-2">
+                    <button onclick="toggleMobileDropdown('mob-about', 'icon-about')" class="w-full flex justify-between items-center text-sm font-black uppercase tracking-widest text-slate-900">
+                        About 
+                        <svg id="icon-about" class="h-4 w-4 rotate-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div id="mob-about" class="mobile-dropdown-content flex flex-col space-y-4 pl-4 border-l-2 border-slate-100 mt-2">
+                        <a href="#" class="text-slate-500 font-bold text-sm pt-2">About Us</a>
+                        <a href="#" class="text-slate-500 font-bold text-sm">Meet The Team</a>
+                        <a href="#" class="text-slate-500 font-bold text-sm pb-2">Careers</a>
+                    </div>
+                </div>
+
                 <a href="/support/" class="block w-full py-5 bg-blue-600 text-white text-center font-black uppercase tracking-widest rounded shadow-xl shadow-blue-200">Support Center</a>
             </div>
         </div>
@@ -231,21 +290,4 @@
                 </div>
             </div>
             <div class="pt-12 border-t border-slate-900 flex justify-between items-center relative">
-                <p class="text-[9px] font-black uppercase tracking-[0.2em] text-slate-700">© 2024 TECH VELOCITY LIMITED.</p>
-                <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="absolute right-0 bottom-4 w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center hover:bg-blue-700 transition shadow-2xl shadow-blue-600/20">
-                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 15l7-7 7 7"></path></svg>
-                </button>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        // Toggle Mobile Main Menu
-        const mobileToggle = document.getElementById('mobile-toggle');
-        const mobileMenu = document.getElementById('mobile-menu');
-        mobileToggle.addEventListener('click', () => {
-            mobileMenu.classList.toggle('open');
-        });
-    </script>
-</body>
-</html>
+                <p class="text-[9px] font-black uppercase tracking-[0.2em] text-slate-700">© 2024 TECH VELOCITY LIMIT
