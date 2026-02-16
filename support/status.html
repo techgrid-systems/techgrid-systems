@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Support Velocity | System Status</title>
+    <title>TechGrid Systems | System Status</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -25,7 +25,7 @@
                     <div class="bg-blue-600 p-2 rounded-lg">
                         <i class="fas fa-bolt text-white text-xl"></i>
                     </div>
-                    <span class="text-xl font-bold tracking-tight text-slate-800">Support Velocity Status</span>
+                    <span class="text-xl font-bold tracking-tight text-slate-800">TechGrid Systems Status</span>
                 </div>
                 <a href="" class="text-sm font-medium text-blue-600 hover:text-blue-800">
                     <i class="fas fa-arrow-left mr-1"></i> Back to Portal
@@ -51,7 +51,7 @@
                         <span class="text-slate-500 italic font-semibold">Contact Support:</span>
                         <div class="flex items-center gap-2 text-blue-600 font-bold">
                             <i class="fas fa-envelope"></i>
-                            <a href="mailto:support@support-velocity.co.uk">support@support-velocity.co.uk</a>
+                            <a href="mailto:support@techgrid-systems.co.uk">support@techgrid-systems.co.uk</a>
                         </div>
                         <div class="flex items-center gap-2 text-blue-600 font-bold">
                             <i class="fas fa-phone"></i>
@@ -108,18 +108,18 @@
 
     <script>
         const services = [
-            { id: 'main-web', name: 'Main Website', url: 'https://support-velocity.com', status: 'pending' },
-            { id: 'portal', name: 'Support Portal', url: 'https://support.support-velocity.com', status: 'pending' },
-            { id: 'domain-com', name: 'Global domain (.com)', url: 'https://support-velocity.com', status: 'pending' },
-            { id: 'domain-org', name: 'Global domain (.org)', url: 'https://support-velocity.org', status: 'pending' },
-            { id: 'domain-net', name: 'Global domain (.net)', url: 'https://support-velocity.net', status: 'pending' },
-            { id: 'domain-org-uk', name: 'Global domain (.org.uk)', url: 'https://support-velocity.org.uk', status: 'pending' },
-            { id: 'domain-co-uk', name: 'Global domain (.co.uk)', url: 'https://support-velocity.co.uk', status: 'pending' }
+            { id: 'main-web', name: 'Main Website', url: 'https://techgrid-systems.com', status: 'pending' },
+            { id: 'portal', name: 'Support Portal', url: 'https://support.techgrid-systems.com', status: 'pending' },
+            { id: 'domain-com', name: 'Global domain (.com)', url: 'https://techgrid-systems.com', status: 'pending' },
+            { id: 'domain-org', name: 'Global domain (.org)', url: 'https://techgrid-systems.org', status: 'pending' },
+            { id: 'domain-net', name: 'Global domain (.net)', url: 'https://techgrid-systems.net', status: 'pending' },
+            { id: 'domain-org-uk', name: 'Global domain (.org.uk)', url: 'https://techgrid-systems.org.uk', status: 'pending' },
+            { id: 'domain-co-uk', name: 'Global domain (.co.uk)', url: 'https://techgrid-systems.co.uk', status: 'pending' }
         ];
 
         const infraNodes = [
             { id: 'core-lon', name: 'Core Node - London', host: '8.8.8.8', status: 'pending' },
-            { id: 'core-tv-server', name: 'Core Server - Support Velocity', host: 'SV-DC-01.support-velocity.net', status: 'pending' },
+            { id: 'core-tv-server', name: 'Core Server - TechGrid Systens', host: 'SV-DC-01.techgrid-systems.net', status: 'pending' },
             { id: 'db-cluster', name: 'Primary DB Cluster', host: '1.1.1.1', status: 'pending' },
             { id: 'auth-server', name: 'Auth Node Alpha', host: '9.9.9.9', status: 'pending' }
         ];
@@ -217,13 +217,13 @@
                 
                 if (totalOffline.length === totalNodesCount) {
                     incidentTitle.innerText = "All nodes are being reported as down";
-                    incidentDesc.innerText = "Tech Velocity is monitoring a major disruption affecting the following nodes:";
+                    incidentDesc.innerText = "TechGrid Systems is monitoring a major disruption affecting the following nodes:";
                 } else if (offlineInfra.length > 1) {
                     incidentTitle.innerText = "We are aware of multiple infrastructure nodes showing as down";
-                    incidentDesc.innerText = "Tech Velocity is monitoring a disruption with the infrastructure endpoints affecting the following nodes:";
+                    incidentDesc.innerText = "TechGrid Systems is monitoring a disruption with the infrastructure endpoints affecting the following nodes:";
                 } else {
                     incidentTitle.innerText = "Certain nodes are being reported as down";
-                    incidentDesc.innerText = "Tech Velocity is monitoring a disruption affecting the following nodes:";
+                    incidentDesc.innerText = "TechGrid Systems is monitoring a disruption affecting the following nodes:";
                 }
 
                 affectedList.innerHTML = totalOffline.map(node => `
@@ -256,4 +256,5 @@
         };
     </script>
 </body>
+
 </html>
