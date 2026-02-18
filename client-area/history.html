@@ -23,20 +23,21 @@
         .status-progress { background-color: #fef9c3; color: #854d0e; }
         .status-pending { background-color: #e2e8f0; color: #475569; }
 
-        .history-row {
-            transition: background-color 0.2s ease;
-        }
-        .history-row:hover {
-            background-color: #f1f5f9;
-        }
+        .history-row { transition: background-color 0.2s ease; }
+        .history-row:hover { background-color: #f1f5f9; }
 
         #main-content { opacity: 0; transition: opacity 0.3s ease; }
         .auth-verified #main-content { opacity: 1; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fadeIn { animation: fadeIn 0.4s ease forwards; }
     </style>
 </head>
 <body class="min-h-screen flex flex-col">
 
-    <!-- HEADER -->
     <header class="bg-[#1e293b] text-white px-6 md:px-12 h-16 flex items-center justify-between sticky top-0 z-50">
         <div class="flex items-center space-x-10">
             <div class="flex flex-col leading-none cursor-pointer" onclick="navigateTo('dashboard.html')">
@@ -44,7 +45,7 @@
                 <span class="text-[10px] tracking-[0.3em] uppercase opacity-70">Systems</span>
             </div>
             <nav class="hidden lg:flex items-center space-x-6 text-xs uppercase tracking-widest font-medium opacity-80 h-full">
-                <a href="javascript:void(0)" onclick="navigateTo('home.html')" class="h-16 flex items-center px-2">Home</a>
+                <a href="javascript:void(0)" onclick="navigateTo('dashboard.html')" class="h-16 flex items-center px-2">Home</a>
                 <a href="javascript:void(0)" onclick="navigateTo('new-request.html')" class="h-16 flex items-center px-2">New Request</a>
                 <a href="javascript:void(0)" onclick="navigateTo('history.html')" class="h-16 flex items-center px-2 border-b-2 border-blue-400 text-blue-400">My History</a>
             </nav>
@@ -59,11 +60,11 @@
         <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
             <div>
                 <h1 class="text-3xl font-black text-slate-900 mb-2">My History</h1>
-                <p class="text-slate-500">Track and manage your submitted support requests.</p>
+                <p class="text-slate-500 text-sm">Real-time synchronization of your local submissions.</p>
             </div>
             <div class="flex space-x-2">
-                <button class="px-4 py-2 bg-white border border-slate-200 rounded-lg text-xs font-bold text-slate-600 hover:bg-slate-50 transition">
-                    <i class="fas fa-filter mr-2"></i> Filter
+                <button onclick="clearHistory()" class="px-4 py-2 border border-slate-200 text-slate-500 rounded-lg text-xs font-bold hover:bg-slate-50 transition">
+                    Clear Local History
                 </button>
                 <button onclick="navigateTo('new-request.html')" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-xs font-bold hover:bg-blue-700 transition shadow-lg shadow-blue-200">
                     <i class="fas fa-plus mr-2"></i> New Request
@@ -71,106 +72,135 @@
             </div>
         </div>
 
-        <!-- HISTORY TABLE -->
         <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
-            <div class="overflow-x-auto">
+            <div id="table-container" class="overflow-x-auto hidden">
                 <table class="w-full text-left border-collapse">
                     <thead>
                         <tr class="bg-slate-50 border-b border-slate-200">
-                            <th class="px-6 py-4 text-[10px] font-black uppercase tracking-widest text-slate-400">Ticket ID</th>
+                            <th class="px-6 py-4 text-[10px] font-black uppercase tracking-widest text-slate-400">ID</th>
                             <th class="px-6 py-4 text-[10px] font-black uppercase tracking-widest text-slate-400">Subject</th>
-                            <th class="px-6 py-4 text-[10px] font-black uppercase tracking-widest text-slate-400">Type</th>
-                            <th class="px-6 py-4 text-[10px] font-black uppercase tracking-widest text-slate-400">Date Submitted</th>
+                            <th class="px-6 py-4 text-[10px] font-black uppercase tracking-widest text-slate-400">Category</th>
+                            <th class="px-6 py-4 text-[10px] font-black uppercase tracking-widest text-slate-400">Date</th>
                             <th class="px-6 py-4 text-[10px] font-black uppercase tracking-widest text-slate-400">Status</th>
                             <th class="px-6 py-4 text-[10px] font-black uppercase tracking-widest text-slate-400 text-right">Action</th>
                         </tr>
                     </thead>
-                    <tbody class="divide-y divide-slate-100">
-                        <!-- Ticket 1 -->
-                        <tr class="history-row">
-                            <td class="px-6 py-5 font-mono text-xs text-slate-500">#TG-88210</td>
-                            <td class="px-6 py-5">
-                                <div class="text-sm font-bold text-slate-800">VPN Connection Issues</div>
-                                <div class="text-[10px] text-slate-400">Unable to reach the London server from home.</div>
-                            </td>
-                            <td class="px-6 py-5 text-xs text-slate-600">Technical Support</td>
-                            <td class="px-6 py-5 text-xs text-slate-600">Oct 24, 2023</td>
-                            <td class="px-6 py-5">
-                                <span class="status-pill status-resolved">Resolved</span>
-                            </td>
-                            <td class="px-6 py-5 text-right">
-                                <button class="text-blue-600 hover:text-blue-800 font-bold text-xs">View</button>
-                            </td>
-                        </tr>
-                        <!-- Ticket 2 -->
-                        <tr class="history-row">
-                            <td class="px-6 py-5 font-mono text-xs text-slate-500">#TG-88245</td>
-                            <td class="px-6 py-5">
-                                <div class="text-sm font-bold text-slate-800">New Onboarding: Jane Smith</div>
-                                <div class="text-[10px] text-slate-400">Requesting hardware and software license access.</div>
-                            </td>
-                            <td class="px-6 py-5 text-xs text-slate-600">Account / Access</td>
-                            <td class="px-6 py-5 text-xs text-slate-600">Oct 26, 2023</td>
-                            <td class="px-6 py-5">
-                                <span class="status-pill status-progress">In Progress</span>
-                            </td>
-                            <td class="px-6 py-5 text-right">
-                                <button class="text-blue-600 hover:text-blue-800 font-bold text-xs">View</button>
-                            </td>
-                        </tr>
-                        <!-- Ticket 3 -->
-                        <tr class="history-row">
-                            <td class="px-6 py-5 font-mono text-xs text-slate-500">#TG-88301</td>
-                            <td class="px-6 py-5">
-                                <div class="text-sm font-bold text-slate-800">Invoice #INV-2023-09 Query</div>
-                                <div class="text-[10px] text-slate-400">Incorrect billing amount for last month.</div>
-                            </td>
-                            <td class="px-6 py-5 text-xs text-slate-600">Billing Inquiry</td>
-                            <td class="px-6 py-5 text-xs text-slate-600">Yesterday</td>
-                            <td class="px-6 py-5">
-                                <span class="status-pill status-pending">Pending Review</span>
-                            </td>
-                            <td class="px-6 py-5 text-right">
-                                <button class="text-blue-600 hover:text-blue-800 font-bold text-xs">View</button>
-                            </td>
-                        </tr>
+                    <tbody id="ticket-list" class="divide-y divide-slate-100">
+                        <!-- Sync Data Injected Here -->
                     </tbody>
                 </table>
             </div>
-            <!-- Empty state fallback logic (hidden for now) -->
-            <div id="empty-state" class="hidden py-20 flex flex-col items-center justify-center text-center">
-                <div class="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center text-slate-300 text-2xl mb-4">
-                    <i class="fas fa-folder-open"></i>
+
+            <div id="empty-state" class="py-20 flex flex-col items-center justify-center text-center">
+                <div class="w-16 h-16 bg-slate-50 rounded-full flex items-center justify-center text-slate-200 text-2xl mb-4">
+                    <i class="fas fa-inbox"></i>
                 </div>
-                <h3 class="text-slate-800 font-bold">No tickets found</h3>
-                <p class="text-slate-500 text-xs">You haven't submitted any requests yet.</p>
+                <h3 class="text-slate-800 font-bold">No active requests</h3>
+                <p class="text-slate-400 text-xs">When you submit a form in the portal, it will appear here instantly.</p>
             </div>
         </div>
     </main>
 
     <script>
-        function navigateTo(page) {
-            const user = localStorage.getItem('techgrid_user');
-            window.location.href = user ? `${page}?username=${encodeURIComponent(user)}` : page;
+        // STORAGE KEY constant
+        const TICKET_STORAGE_KEY = 'techgrid_tickets';
+
+        function init() {
+            verifySession();
+            renderTickets();
+
+            // LIVE SYNC: Listen for changes made in other tabs/windows
+            window.addEventListener('storage', (event) => {
+                if (event.key === TICKET_STORAGE_KEY) {
+                    renderTickets();
+                }
+            });
+        }
+
+        function renderTickets() {
+            const ticketList = document.getElementById('ticket-list');
+            const emptyState = document.getElementById('empty-state');
+            const tableContainer = document.getElementById('table-container');
+            
+            // Get data from localStorage
+            const rawData = localStorage.getItem(TICKET_STORAGE_KEY);
+            let tickets = rawData ? JSON.parse(rawData) : [];
+
+            // Filter by current user (simple session simulation)
+            const currentUser = localStorage.getItem('techgrid_user');
+            tickets = tickets.filter(t => t.user === currentUser);
+
+            if (tickets.length === 0) {
+                emptyState.classList.remove('hidden');
+                tableContainer.classList.add('hidden');
+                return;
+            }
+
+            emptyState.classList.add('hidden');
+            tableContainer.classList.remove('hidden');
+
+            // Sort by date newest first
+            tickets.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+
+            ticketList.innerHTML = tickets.map(ticket => `
+                <tr class="history-row animate-fadeIn">
+                    <td class="px-6 py-5 font-mono text-[10px] text-slate-400">#${ticket.id.substring(0,6).toUpperCase()}</td>
+                    <td class="px-6 py-5">
+                        <div class="text-sm font-bold text-slate-800">${ticket.subject || 'No Subject'}</div>
+                        <div class="text-[10px] text-slate-400 truncate max-w-xs">${ticket.description || 'No description provided'}</div>
+                    </td>
+                    <td class="px-6 py-5 text-xs text-slate-600 font-medium">${ticket.category || 'General'}</td>
+                    <td class="px-6 py-5 text-xs text-slate-500">${new Date(ticket.timestamp).toLocaleDateString()}</td>
+                    <td class="px-6 py-5">
+                        <span class="status-pill ${getStatusClass(ticket.status)}">${ticket.status || 'Pending'}</span>
+                    </td>
+                    <td class="px-6 py-5 text-right">
+                        <button onclick="viewDetails('${ticket.id}')" class="text-blue-600 hover:text-blue-800 font-bold text-xs">Details</button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function getStatusClass(status) {
+            status = status?.toLowerCase() || '';
+            if (status.includes('resolved')) return 'status-resolved';
+            if (status.includes('progress')) return 'status-progress';
+            return 'status-pending';
         }
 
         function verifySession() {
             const urlParams = new URLSearchParams(window.location.search);
-            let currentUser = urlParams.get('username') || localStorage.getItem('techgrid_user');
+            let sessionName = urlParams.get('username') || localStorage.getItem('techgrid_user');
 
-            if (currentUser && currentUser !== "null") {
-                const cleanName = decodeURIComponent(currentUser).replace(/['"]+/g, '');
+            if (sessionName && sessionName !== "null") {
+                const cleanName = decodeURIComponent(sessionName).replace(/['"]+/g, '');
                 localStorage.setItem('techgrid_user', cleanName);
                 document.getElementById('user-display-name').innerText = cleanName.toUpperCase();
-                
-                // Reveal content
                 document.body.classList.add('auth-verified');
             } else {
                 window.location.href = "login.html";
             }
         }
 
-        window.onload = verifySession;
+        window.navigateTo = (page) => {
+            const user = localStorage.getItem('techgrid_user');
+            window.location.href = user ? `${page}?username=${encodeURIComponent(user)}` : page;
+        };
+
+        window.clearHistory = () => {
+            if(confirm("Are you sure you want to clear your local submission history?")) {
+                localStorage.removeItem(TICKET_STORAGE_KEY);
+                renderTickets();
+            }
+        };
+
+        window.viewDetails = (id) => {
+            // Placeholder for detail view logic
+            console.log("Viewing ticket:", id);
+        };
+
+        // Initialize on load
+        init();
     </script>
 </body>
 </html>
