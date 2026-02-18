@@ -112,7 +112,7 @@
         <!-- DASHBOARD TAB -->
         <div id="tab-dashboard" class="tab-content">
             <div id="service-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <!-- Row 1 -->
+                <!-- Grid items same as previous version -->
                 <div onclick="switchTab('new-request')" class="service-card p-8 flex flex-col items-center text-center searchable" data-search="it support hardware software help technical repair fix">
                     <div class="text-blue-600 text-5xl mb-6"><i class="fas fa-cog"></i></div>
                     <h3 class="font-bold text-slate-800 mb-2">IT Support</h3>
@@ -137,7 +137,6 @@
                     <p class="text-xs text-slate-400 leading-relaxed">Have a request related to communications?</p>
                 </div>
 
-                <!-- Row 2 -->
                 <div class="service-card p-8 flex flex-col items-center text-center searchable" data-search="facilities building office desk light maintenance campus">
                     <div class="text-blue-600 text-5xl mb-6"><i class="fas fa-building"></i></div>
                     <h3 class="font-bold text-slate-800 mb-2">Campus Facilities</h3>
@@ -172,16 +171,14 @@
 
         <!-- NEW REQUEST TAB -->
         <div id="tab-new-request" class="tab-content hidden">
-            <div id="request-selection-view">
-                <div class="mb-10">
-                    <h2 class="text-2xl font-bold text-slate-800">Select Request Type</h2>
-                    <p class="text-slate-500 mt-1">Choose the form that best matches your needs.</p>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <div onclick="openForm('general')" class="bg-white border p-10 rounded text-center cursor-pointer hover:border-blue-500 transition shadow-sm">
-                        <i class="fas fa-question text-3xl text-slate-400 mb-4"></i>
-                        <h3 class="font-bold uppercase text-xs tracking-widest text-slate-700">General Help</h3>
-                    </div>
+            <div class="mb-10">
+                <h2 class="text-2xl font-bold text-slate-800">Select Request Type</h2>
+                <p class="text-slate-500 mt-1">Choose the form that best matches your needs.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div onclick="alert('Form system coming soon!')" class="bg-white border p-10 rounded text-center cursor-pointer hover:border-blue-500 transition shadow-sm">
+                    <i class="fas fa-question text-3xl text-slate-400 mb-4"></i>
+                    <h3 class="font-bold uppercase text-xs tracking-widest text-slate-700">General Help</h3>
                 </div>
             </div>
         </div>
@@ -190,7 +187,7 @@
         <div id="tab-tickets" class="tab-content hidden">
             <div class="bg-white border border-slate-200 rounded-lg overflow-hidden">
                 <div id="ticket-list" class="divide-y divide-slate-50">
-                    <div class="p-12 text-center text-slate-400 font-medium">Fetching your request history...</div>
+                    <div class="p-12 text-center text-slate-400 font-medium">No recent requests found.</div>
                 </div>
             </div>
         </div>
@@ -202,51 +199,40 @@
     </footer>
 
     <script>
-        // SESSION MANAGEMENT
         function syncUserSession() {
-            // Priority 1: Check URL (if redirected from login with ?username=...)
             const params = new URLSearchParams(window.location.search);
             let user = params.get('username');
             
-            // Priority 2: Check LocalStorage
-            if (!user) {
-                user = localStorage.getItem('techgrid_user') || 
-                       localStorage.getItem('username') || 
-                       localStorage.getItem('currentUser');
+            // If user came from URL, save it
+            if (user) {
+                localStorage.setItem('techgrid_user', user);
+            } else {
+                // Otherwise check storage
+                user = localStorage.getItem('techgrid_user') || localStorage.getItem('username');
             }
 
             const nameElement = document.getElementById('user-name-text');
             
             if (user && user !== "null" && user !== "") {
-                // Clean up any JSON string quotes
                 const cleanName = user.replace(/['"]+/g, '');
                 nameElement.innerText = `USER: ${cleanName.toUpperCase()}`;
                 
-                // Save it back to ensure persistence across all keys
+                // Keep storage in sync
                 localStorage.setItem('techgrid_user', cleanName);
                 
                 // Hide loader
                 setTimeout(() => {
-                    document.getElementById('loading').classList.add('hidden');
-                }, 800);
+                    document.getElementById('loading').style.display = 'none';
+                }, 500);
             } else {
-                // NO SESSION FOUND - Redirect to login.html in the SAME folder
-                // We use window.location.pathname to find the directory we are in
-                const pathParts = window.location.pathname.split('/');
-                pathParts[pathParts.length - 1] = 'login.html';
-                const loginPath = pathParts.join('/');
-                
-                // Avoid infinite redirect if already trying to load login
-                if (!window.location.pathname.includes('login.html')) {
-                    window.location.href = 'login.html';
-                }
+                // FALLBACK: If no session, go back to login
+                // We assume login.html is in the same directory
+                window.location.href = 'login.html';
             }
         }
 
         window.logout = () => {
-            localStorage.removeItem('techgrid_user');
-            localStorage.removeItem('username');
-            localStorage.removeItem('currentUser');
+            localStorage.clear();
             window.location.href = 'login.html';
         };
 
@@ -264,36 +250,7 @@
                 link.classList.remove('active');
                 if (link.getAttribute('onclick')?.includes(tabName)) link.classList.add('active');
             });
-            
-            if (tabName === 'tickets') renderMockTickets();
         };
-
-        function renderMockTickets() {
-            const list = document.getElementById('ticket-list');
-            const tickets = JSON.parse(localStorage.getItem('tg_mock_tickets') || '[]');
-            
-            if (tickets.length === 0) {
-                list.innerHTML = `
-                    <div class="p-20 text-center flex flex-col items-center">
-                        <i class="fas fa-clipboard-list text-slate-100 text-6xl mb-4"></i>
-                        <p class="text-slate-400 font-bold uppercase tracking-widest text-xs">No Active Requests Found</p>
-                    </div>`;
-                return;
-            }
-            
-            list.innerHTML = tickets.reverse().map(t => `
-                <div class="p-6 flex items-center justify-between hover:bg-slate-50 transition cursor-pointer">
-                    <div class="flex flex-col">
-                        <span class="text-[9px] font-black text-slate-400 uppercase">#${t.id}</span>
-                        <span class="font-bold text-slate-800">${t.subject}</span>
-                    </div>
-                    <div class="flex items-center space-x-6">
-                        <span class="text-[9px] font-black px-3 py-1.5 rounded-full bg-blue-50 text-blue-600 uppercase tracking-tighter">${t.status}</span>
-                        <i class="fas fa-chevron-right text-slate-300 text-xs"></i>
-                    </div>
-                </div>
-            `).join('');
-        }
 
         function setupSearch() {
             const searchInput = document.getElementById('main-search');
@@ -316,14 +273,6 @@
                 document.getElementById('search-no-results').classList.toggle('hidden', serviceFound || term === '');
             });
         }
-
-        window.resetSearch = () => {
-            const searchInput = document.getElementById('main-search');
-            if (searchInput) {
-                searchInput.value = '';
-                searchInput.dispatchEvent(new Event('input'));
-            }
-        };
 
         window.onload = () => {
             syncUserSession();
