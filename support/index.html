@@ -7,44 +7,102 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
         
         body { 
             font-family: 'Inter', sans-serif; 
-            background-color: #ffffff;
+            background-color: #f8fafc;
             color: #333333;
             scroll-behavior: smooth;
         }
 
-        /* Original Blue Navigation Styles */
-        .nav-link { position: relative; transition: color 0.3s ease; cursor: pointer; }
-        .nav-link::after { 
-            content: ''; 
-            position: absolute; 
-            width: 0; 
-            height: 2px; 
-            bottom: -4px; 
-            left: 0; 
-            background-color: #2563eb; 
-            transition: width 0.3s ease; 
-        }
-        .nav-link:hover::after { width: 100%; }
-
-        /* Screenshot Specific Styles - Using Blue Branding */
         .hero-section {
-            background-color: #2d292e;
+            background-color: #1a1a1a;
             color: #ffffff;
+            position: relative;
+            overflow: hidden;
         }
 
-        .btn-brand {
-            background-color: #2563eb; /* Matches the blue branding */
-            color: #ffffff;
+        /* List Item Styling */
+        .list-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .support-list-item {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            border: 1px solid #f1f5f9;
+        }
+
+        @media (min-width: 768px) {
+            .support-list-item {
+                flex-direction: row;
+                align-items: center;
+                text-align: left;
+            }
+        }
+
+        .support-list-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            border-color: #3b82f6;
+        }
+
+        .content-area {
+            flex-grow: 1;
+        }
+
+        .btn-portal {
+            background-color: #2563eb;
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 8px;
+            font-weight: 800;
+            text-transform: uppercase;
+            font-size: 0.875rem;
+            letter-spacing: 0.05em;
             transition: all 0.2s ease;
+            white-space: nowrap;
+            display: inline-block;
+            text-align: center;
         }
 
-        .btn-brand:hover {
+        .btn-portal:hover {
             background-color: #1d4ed8;
-            transform: translateY(-1px);
+            box-shadow: 0 8px 15px rgba(37, 99, 235, 0.3);
+        }
+
+        .card-title {
+            font-weight: 900;
+            font-size: 1.5rem;
+            color: #0f172a;
+            text-transform: uppercase;
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.02em;
+        }
+
+        .card-description {
+            color: #64748b;
+            font-size: 1rem;
+            line-height: 1.6;
+            max-width: 650px;
+        }
+
+        .email-label {
+            display: block;
+            font-size: 0.7rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            color: #94a3b8;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.2rem;
         }
 
         .accent-text {
@@ -52,159 +110,148 @@
         }
 
         .content-container {
-            max-width: 1100px;
+            max-width: 1400px;
         }
     </style>
 </head>
 <body>
 
+    <!-- Navigation -->
     <header class="sticky top-0 z-50 w-full bg-white border-b border-slate-200">
         <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16 items-center">
-                <div class="flex items-center gap-2 cursor-pointer" onclick="location.href='index.html'">
+            <div class="flex justify-between h-20 items-center">
+                <div class="flex items-center gap-2 cursor-pointer">
                     <span class="text-xl italic font-black tracking-tighter text-slate-900 uppercase">
-                        Support <span class="text-blue-600">TechGrid Systems</span>
+                        TECHGRID <span class="text-blue-600">SYSTEMS</span>
                     </span>
                 </div>
-
-                <div class="hidden md:flex items-center space-x-4">
-                    <a href="">
-                        <button class="bg-blue-600 text-white px-8 py-2.5 rounded-full text-sm font-bold hover:bg-blue-700 transition shadow-lg shadow-blue-500/30">
-                            System Status
-                        </button>
-                    </a>
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="#" class="text-sm font-bold text-slate-600 hover:text-blue-600 transition uppercase tracking-wider">Home</a>
+                    <button class="bg-blue-600 text-white px-6 py-2.5 rounded-md text-xs font-black uppercase tracking-widest hover:bg-blue-700 transition">
+                        System Status
+                    </button>
                 </div>
             </div>
         </nav>
     </header>
 
-    <section class="hero-section py-16 px-6 md:px-12">
-        <div class="content-container mx-auto">
-            <p class="accent-text text-sm font-bold tracking-widest uppercase mb-4">Helpdesk</p>
-            <h1 class="text-5xl md:text-6xl font-bold mb-8 text-white">Need help?</h1>
-            
-            <div class="max-w-2xl">
-                <p class="text-xl md:text-2xl font-light leading-relaxed mb-6 text-gray-200">
-                    Whatever your tech issue, our team are here to help. Use the options below to get in touch.
-                </p>
-                
-                <p class="text-lg md:text-xl">
-                    Got a new challenge you'd like support with? 
-                    <a href="mailto:sales@techgrid-systems.com" class="font-bold border-b-2 border-white hover:text-blue-400 hover:border-blue-400 transition-colors">
-                        Talk to our sales team here.
-                    </a>
-                </p>
-            </div>
+    <!-- Hero Section -->
+    <section class="hero-section py-28 px-6">
+        <div class="content-container mx-auto text-center md:text-left">
+            <p class="accent-text text-sm font-black tracking-[0.2em] uppercase mb-4">Support Center</p>
+            <h1 class="text-5xl md:text-8xl font-black mb-8 text-white tracking-tighter">Support Resources</h1>
+            <p class="text-xl md:text-2xl font-light leading-relaxed max-w-3xl text-slate-300">
+                Choose an option below to get the help you need.
+            </p>
         </div>
     </section>
 
-    <main class="py-20 px-6 md:px-12">
-        <div class="content-container mx-auto">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
-                
-                <div class="space-y-16">
-                    <div class="max-w-md">
-                        <h2 class="text-2xl font-bold mb-4">Email</h2>
-                        <p class="text-gray-600 text-lg leading-relaxed">
-                            Drop us an <a href="mailto:support@techgrid-systems.co.uk" class="font-bold border-b-2 border-blue-600 hover:text-blue-600 transition-colors">email</a> and tell us what's gone wrong. Include your contact details, so we can contact you directly.
-                        </p>
-                    </div>
+    <!-- Main Content List -->
+    <main class="py-24 px-6 bg-slate-50">
+        <div class="list-container">
+            
+            <!-- 1. Client Area -->
+            <div class="support-list-item">
+                <div class="content-area">
+                    <h2 class="card-title">Client Area</h2>
+                    <p class="card-description">
+                        Log in to our Client Area to submit tickets, view our knowledge base, see events and announcements.
+                    </p>
+                </div>
+                <div class="mt-6 md:mt-0">
+                    <a href="#" class="btn-portal">Enter Area</a>
+                </div>
+            </div>
 
-                    <div class="max-w-md">
-                        <h2 class="text-2xl font-bold mb-4">Submit a support ticket via our portal</h2>
-                        <p class="text-gray-600 text-lg leading-relaxed mb-6">
-                            Click the button below to access our portal for general support enquiries.
-                        </p>
-                        <a href="https://portal.techgrid-systems.com" class="inline-flex items-center btn-brand px-14 py-2 rounded-full font-bold text-lg shadow-lg shadow-blue-500/20">
-                            Support Centre
-                            <i class="fas fa-arrow-right ml-4 text-sm"></i>
-                        </a>
-                    </div>
+            <!-- 2. Email Support -->
+            <div class="support-list-item">
+                <div class="content-area">
+                    <h2 class="card-title">Email Support</h2>
+                    
+                    <div class="space-y-6 mt-4">
+                        <div>
+                            <span class="email-label">Technical Support</span>
+                            <p class="text-sm text-slate-500 mb-1">If you need support or don't have access to the client area:</p>
+                            <a href="mailto:helpdesk@techgrid-systems.co.uk" class="text-blue-600 font-bold hover:underline">helpdesk@techgrid-systems.co.uk</a>
+                        </div>
+                        
+                        <div>
+                            <span class="email-label">Business Information</span>
+                            <p class="text-sm text-slate-500 mb-1">For any information regarding the business:</p>
+                            <a href="mailto:info@techgrid-systems.co.uk" class="text-blue-600 font-bold hover:underline">info@techgrid-systems.co.uk</a>
+                        </div>
 
-                    <div class="max-w-md">
-                        <h2 class="text-2xl font-bold mb-4">Speak to one of our team</h2>
-                        <p class="text-gray-600 text-lg leading-relaxed">
-                            Alternatively, call our helpdesk on <span class="font-bold text-blue-600">0208 312 9696</span>.
-                        </p>
-                    </div>
-
-                    <div class="max-w-md">
-                        <h2 class="text-2xl font-bold mb-4">applications</h2>
-                        <a href="https://applications.techgrid-systems.com" class="inline-flex items-center btn-brand px-6 py-2 rounded-full font-bold text-lg mt-2 shadow-lg shadow-blue-500/20">
-                            Click here to go to our applications portal
-                            <i class="fas fa-arrow-right ml-4 text-sm"></i>
-                        </a>
+                        <div>
+                            <span class="email-label">Sales Support</span>
+                            <p class="text-sm text-slate-500 mb-1">To reach our sales team:</p>
+                            <a href="mailto:sales@techgrid-systems.co.uk" class="text-blue-600 font-bold hover:underline">sales@techgrid-systems.co.uk</a>
+                        </div>
                     </div>
                 </div>
-
-                <div class="hidden md:block"></div>
             </div>
+
+            <!-- 3. Remote Support -->
+            <div class="support-list-item">
+                <div class="content-area">
+                    <h2 class="card-title">Remote Support</h2>
+                    <p class="card-description">
+                        Immediate assistance tool. Click below to download our quick-support file (TeamViewer) for your operating system.
+                    </p>
+                    <div class="mt-4 flex items-center gap-2 text-slate-400 text-[10px] font-black uppercase tracking-widest">
+                        <i id="os-icon" class="fas fa-laptop"></i>
+                        <span id="os-text">Detecting System...</span>
+                    </div>
+                </div>
+                <div class="mt-6 md:mt-0">
+                    <a id="remote-btn" href="#" class="btn-portal">Download QS</a>
+                </div>
+            </div>
+
+            <!-- 4. VoIP Portal -->
+            <div class="support-list-item">
+                <div class="content-area">
+                    <h2 class="card-title">VoIP Portal</h2>
+                    <p class="card-description">
+                        Log in to manage your TechGrid Systems VoIP account, call recordings, and routing rules.
+                    </p>
+                </div>
+                <div class="mt-6 md:mt-0">
+                    <a href="#" class="btn-portal">Log In</a>
+                </div>
+            </div>
+
         </div>
     </main>
 
-    <footer class="bg-slate-50 border-t border-slate-200 pt-16 pb-8 px-6 md:px-12">
-        <div class="content-container mx-auto">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
-                
-                <div class="col-span-1 md:col-span-1">
-                    <div class="flex items-center gap-2 mb-6">
-                        <div class="bg-blue-600 p-1.5 rounded-lg">
-                            <i class="fas fa-bolt text-white text-sm"></i>
-                        </div>
-                        <span class="text-lg font-bold tracking-tight text-slate-800">TechGrid Systems</span>
-                    </div>
-                    <p class="text-slate-500 text-sm leading-relaxed">
-                        Providing high TechGrid Systems technical support and innovative solutions for your business challenges.
-                    </p>
-                </div>
-
-                <div>
-                    <h3 class="text-sm font-bold uppercase tracking-wider text-slate-900 mb-6">Support</h3>
-                    <ul class="space-y-4 text-sm text-slate-600">
-                        <li><a href="https://portal.techgrid-systems.com" class="hover:text-blue-600 transition-colors">Client Portal</a></li>
-                        <li><a href="" class="hover:text-blue-600 transition-colors">System Status</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition-colors">Knowledge Base</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition-colors">Downloads</a></li>
-                    </ul>
-                </div>
-
-                <div>
-                    <h3 class="text-sm font-bold uppercase tracking-wider text-slate-900 mb-6">Company</h3>
-                    <ul class="space-y-4 text-sm text-slate-600">
-                        <li><a href="#" class="hover:text-blue-600 transition-colors">About Us</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition-colors">Contact</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition-colors">Privacy Policy</a></li>
-                        <li><a href="#" class="hover:text-blue-600 transition-colors">Terms of Service</a></li>
-                    </ul>
-                </div>
-
-                <div>
-                    <h3 class="text-sm font-bold uppercase tracking-wider text-slate-900 mb-6">Get in Touch</h3>
-                    <ul class="space-y-4 text-sm text-slate-600">
-                        <li class="flex items-center gap-3">
-                            <i class="fas fa-phone text-blue-600"></i>
-                            0208 312 9696
-                        </li>
-                        <li class="flex items-center gap-3">
-                            <i class="fas fa-envelope text-blue-600"></i>
-                            support@techgrid-systems.co.uk
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="pt-8 border-t border-slate-200 flex flex-col md:flex-row justify-between items-center gap-4">
-                <p class="text-xs text-slate-500">
-                    &copy; 2026 TechGrid Systems Ltd. All rights reserved.
-                </p>
-                <div class="flex gap-6">
-                    <a href="#" class="text-slate-400 hover:text-blue-600 transition-colors"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="#" class="text-slate-400 hover:text-blue-600 transition-colors"><i class="fab fa-twitter"></i></a>
-                </div>
-            </div>
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-200 py-12 px-6">
+        <div class="content-container mx-auto flex flex-col md:row justify-between items-center gap-6">
+            <span class="text-xl font-black italic tracking-tighter text-slate-900 uppercase">TechGrid <span class="text-blue-600">Systems</span></span>
+            <p class="text-slate-400 text-[10px] font-black uppercase tracking-widest">&copy; 2026 TechGrid Systems Limited.</p>
         </div>
     </footer>
 
-</body>
+    <script>
+        // OS Detection for TeamViewer
+        window.onload = function() {
+            const btn = document.getElementById('remote-btn');
+            const osText = document.getElementById('os-text');
+            const osIcon = document.getElementById('os-icon');
+            const platform = window.navigator.platform.toLowerCase();
+            const userAgent = window.navigator.userAgent.toLowerCase();
 
+            if (platform.includes('mac') || userAgent.includes('mac')) {
+                btn.href = "https://download.teamviewer.com/download/TeamViewerQS.dmg";
+                btn.innerText = "Download for Mac";
+                osText.innerText = "macOS Detected";
+                osIcon.className = "fab fa-apple text-lg text-blue-400";
+            } else {
+                btn.href = "https://download.teamviewer.com/download/TeamViewerQS.exe";
+                btn.innerText = "Download for Windows";
+                osText.innerText = "Windows Detected";
+                osIcon.className = "fab fa-windows text-lg text-blue-400";
+            }
+        };
+    </script>
+</body>
 </html>
