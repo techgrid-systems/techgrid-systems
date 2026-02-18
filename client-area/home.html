@@ -25,6 +25,8 @@
             border: 1px solid #e2e8f0;
             transition: all 0.2s ease;
             cursor: pointer;
+            text-decoration: none;
+            color: inherit;
         }
         
         .service-card:hover {
@@ -33,13 +35,11 @@
             border-color: #3b82f6;
         }
 
-        /* Nav active state */
         .nav-link.active {
             color: #60a5fa;
             border-bottom: 2px solid #60a5fa;
         }
 
-        /* Prevent content jump during auth check */
         #main-content { opacity: 0; transition: opacity 0.3s ease; }
         .auth-verified #main-content { opacity: 1; }
         
@@ -68,20 +68,19 @@
         <!-- TOP HEADER -->
         <header class="bg-[#1e293b] text-white px-6 md:px-12 h-16 flex items-center justify-between shrink-0 sticky top-0 z-50">
             <div class="flex items-center space-x-10">
-                <div class="flex flex-col leading-none cursor-pointer">
+                <div class="flex flex-col leading-none cursor-pointer" onclick="navigateTo('dashboard.html')">
                     <span class="text-xl font-bold tracking-tight">TechGrid</span>
                     <span class="text-[10px] tracking-[0.3em] uppercase opacity-70">Systems</span>
                 </div>
                 
                 <nav class="hidden lg:flex items-center space-x-6 text-xs uppercase tracking-widest font-medium opacity-80 h-full">
-                    <a href="#" class="nav-link h-16 flex items-center px-2 active">Home</a>
-                    <a href="#" class="nav-link h-16 flex items-center px-2">New Request</a>
-                    <a href="#" class="nav-link h-16 flex items-center px-2">My History</a>
+                    <a href="javascript:void(0)" onclick="navigateTo('dashboard.html')" class="nav-link h-16 flex items-center px-2 active">Home</a>
+                    <a href="javascript:void(0)" onclick="navigateTo('new-request.html')" class="nav-link h-16 flex items-center px-2">New Request</a>
+                    <a href="javascript:void(0)" onclick="navigateTo('history.html')" class="nav-link h-16 flex items-center px-2">My History</a>
                 </nav>
             </div>
 
             <div class="flex items-center space-x-4">
-                <!-- Username Display -->
                 <div id="user-pill" class="flex items-center text-[10px] bg-slate-800/50 border border-slate-700 px-3 py-1.5 rounded-full text-slate-300 font-bold tracking-wider">
                     <i class="fas fa-user-circle mr-2 text-blue-400"></i>
                     <span id="user-display-name">LOADING...</span>
@@ -104,71 +103,79 @@
         <!-- DASHBOARD GRID -->
         <main class="max-w-7xl mx-auto w-full p-8 md:p-12">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="service-card p-10 flex flex-col items-center text-center">
+                <!-- IT Support / New Request -->
+                <a href="javascript:void(0)" onclick="navigateTo('new-request.html')" class="service-card p-10 flex flex-col items-center text-center">
                     <div class="text-blue-600 text-4xl mb-4"><i class="fas fa-ticket-alt"></i></div>
                     <h3 class="font-bold text-slate-800 mb-2">IT Support</h3>
                     <p class="text-xs text-slate-400">Request hardware or software assistance.</p>
-                </div>
-                <div class="service-card p-10 flex flex-col items-center text-center">
+                </a>
+
+                <!-- Knowledge Base -->
+                <a href="javascript:void(0)" onclick="navigateTo('knowledge-base.html')" class="service-card p-10 flex flex-col items-center text-center">
                     <div class="text-blue-600 text-4xl mb-4"><i class="fas fa-book-open"></i></div>
                     <h3 class="font-bold text-slate-800 mb-2">Knowledge Base</h3>
                     <p class="text-xs text-slate-400">Help articles and documentation.</p>
-                </div>
-                <div class="service-card p-10 flex flex-col items-center text-center">
+                </a>
+
+                <!-- Scheduling -->
+                <a href="javascript:void(0)" onclick="navigateTo('scheduling.html')" class="service-card p-10 flex flex-col items-center text-center">
                     <div class="text-blue-600 text-4xl mb-4"><i class="fas fa-calendar-alt"></i></div>
                     <h3 class="font-bold text-slate-800 mb-2">Scheduling</h3>
                     <p class="text-xs text-slate-400">Book a session with a technician.</p>
-                </div>
-                <div class="service-card p-10 flex flex-col items-center text-center">
+                </a>
+
+                <!-- Billing -->
+                <a href="javascript:void(0)" onclick="navigateTo('billing.html')" class="service-card p-10 flex flex-col items-center text-center">
                     <div class="text-blue-600 text-4xl mb-4"><i class="fas fa-file-invoice-dollar"></i></div>
                     <h3 class="font-bold text-slate-800 mb-2">Billing</h3>
                     <p class="text-xs text-slate-400">Manage invoices and payments.</p>
-                </div>
+                </a>
             </div>
         </main>
     </div>
 
     <script>
         /**
+         * Navigation Helper
+         * Appends the current username to any internal link to maintain session
+         */
+        function navigateTo(page) {
+            const user = localStorage.getItem('techgrid_user');
+            if (user) {
+                window.location.href = `${page}?username=${encodeURIComponent(user)}`;
+            } else {
+                window.location.href = page;
+            }
+        }
+
+        /**
          * Session Verification Logic
          */
         function verifySession() {
             const urlParams = new URLSearchParams(window.location.search);
-            
-            // Check order: 1. URL parameter (?username=) 2. LocalStorage (techgrid_user)
             let currentUser = urlParams.get('username') || localStorage.getItem('techgrid_user');
 
             if (currentUser && currentUser !== "null" && currentUser !== "") {
-                // Clean the name (remove extra quotes or URL encoding)
                 const cleanName = decodeURIComponent(currentUser).replace(/['"]+/g, '');
-                
-                // Ensure it's saved in localStorage for future page refreshes
                 localStorage.setItem('techgrid_user', cleanName);
                 
-                // Update UI elements
                 document.getElementById('user-display-name').innerText = cleanName.toUpperCase();
                 document.getElementById('hero-welcome').innerText = `Welcome back, ${cleanName}`;
                 
-                // Show content and hide loader
                 document.body.classList.add('auth-verified');
                 setTimeout(() => {
                     document.getElementById('loading').style.display = 'none';
                 }, 400);
             } else {
-                // No session found: Redirect back to login
                 window.location.href = "login.html";
             }
         }
 
-        /**
-         * Logout functionality
-         */
         window.logout = function() {
             localStorage.removeItem('techgrid_user');
             window.location.href = "login.html";
         };
 
-        // Initialize verification on page load
         window.onload = verifySession;
     </script>
 </body>
