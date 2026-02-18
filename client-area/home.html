@@ -95,7 +95,7 @@
     </div>
 
     <div id="main-content">
-        <!-- TOP HEADER: Matches new-request.html branding -->
+        <!-- TOP HEADER -->
         <header class="bg-[#111827] text-white px-6 md:px-12 h-20 flex items-center justify-between sticky top-0 z-50 shadow-lg">
             <div class="flex items-center space-x-12 h-full">
                 <!-- Logo Section -->
@@ -155,7 +155,7 @@
 
         <!-- DASHBOARD GRID -->
         <main class="max-w-7xl mx-auto w-full p-8 md:p-12 -mt-20 relative z-10">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
                 <!-- IT Support -->
                 <div onclick="navigateTo('new-request.html')" class="service-card p-10 flex flex-col items-center text-center">
                     <div class="w-16 h-16 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center text-3xl mb-6">
@@ -192,38 +192,6 @@
                     <p class="text-sm text-slate-400 font-medium">Manage corporate invoices, payment methods, and user permissions.</p>
                 </div>
             </div>
-
-            <!-- Additional Quick Actions -->
-            <div class="mt-20 grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm flex items-center justify-between">
-                    <div class="flex items-center space-x-6">
-                        <div class="text-blue-600 bg-blue-50 w-12 h-12 rounded-full flex items-center justify-center">
-                            <i class="fas fa-bolt"></i>
-                        </div>
-                        <div>
-                            <h4 class="font-black text-slate-800 text-sm uppercase tracking-tight">Active System Status</h4>
-                            <p class="text-slate-400 text-xs font-bold uppercase tracking-widest flex items-center mt-1">
-                                <span class="w-2 h-2 bg-emerald-500 rounded-full mr-2 animate-pulse"></span>
-                                All Nodes Operational
-                            </p>
-                        </div>
-                    </div>
-                    <button class="text-[10px] font-black text-blue-600 uppercase tracking-widest hover:underline">Full Report</button>
-                </div>
-                
-                <div class="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm flex items-center justify-between">
-                    <div class="flex items-center space-x-6">
-                        <div class="text-red-600 bg-red-50 w-12 h-12 rounded-full flex items-center justify-center">
-                            <i class="fas fa-shield-virus"></i>
-                        </div>
-                        <div>
-                            <h4 class="font-black text-slate-800 text-sm uppercase tracking-tight">Security Center</h4>
-                            <p class="text-slate-400 text-xs font-bold uppercase tracking-widest mt-1">Threat Level: Low (Default)</p>
-                        </div>
-                    </div>
-                    <button class="text-[10px] font-black text-blue-600 uppercase tracking-widest hover:underline">Update Audit</button>
-                </div>
-            </div>
         </main>
     </div>
 
@@ -243,7 +211,6 @@
         function handleSearch(query) {
             const resultsDiv = document.getElementById('search-results');
             const listDiv = document.getElementById('results-list');
-            const searchInput = document.getElementById('global-search');
             
             if (!query.trim()) {
                 resultsDiv.style.display = 'none';
@@ -276,7 +243,6 @@
             }
         }
 
-        // Close search when clicking outside
         document.addEventListener('click', (e) => {
             const searchContainer = document.querySelector('.relative.w-full.max-w-2xl');
             if (searchContainer && !searchContainer.contains(e.target)) {
