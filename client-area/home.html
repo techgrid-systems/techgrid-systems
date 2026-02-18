@@ -208,7 +208,7 @@
             const params = new URLSearchParams(window.location.search);
             let user = params.get('username');
             
-            // Priority 2: Check LocalStorage (The most common keys used by custom JS logins)
+            // Priority 2: Check LocalStorage
             if (!user) {
                 user = localStorage.getItem('techgrid_user') || 
                        localStorage.getItem('username') || 
@@ -217,25 +217,37 @@
 
             const nameElement = document.getElementById('user-name-text');
             
-            if (user && user !== "null") {
-                // Clean up any JSON string quotes if the login script saved it using stringify
+            if (user && user !== "null" && user !== "") {
+                // Clean up any JSON string quotes
                 const cleanName = user.replace(/['"]+/g, '');
                 nameElement.innerText = `USER: ${cleanName.toUpperCase()}`;
+                
+                // Save it back to ensure persistence across all keys
+                localStorage.setItem('techgrid_user', cleanName);
                 
                 // Hide loader
                 setTimeout(() => {
                     document.getElementById('loading').classList.add('hidden');
                 }, 800);
             } else {
-                // Not logged in - redirect back to login page
-                window.location.href = "../login";
+                // NO SESSION FOUND - Redirect to login.html in the SAME folder
+                // We use window.location.pathname to find the directory we are in
+                const pathParts = window.location.pathname.split('/');
+                pathParts[pathParts.length - 1] = 'login.html';
+                const loginPath = pathParts.join('/');
+                
+                // Avoid infinite redirect if already trying to load login
+                if (!window.location.pathname.includes('login.html')) {
+                    window.location.href = 'login.html';
+                }
             }
         }
 
         window.logout = () => {
             localStorage.removeItem('techgrid_user');
             localStorage.removeItem('username');
-            window.location.href = "../login";
+            localStorage.removeItem('currentUser');
+            window.location.href = 'login.html';
         };
 
         window.switchTab = (tabName) => {
@@ -285,6 +297,7 @@
 
         function setupSearch() {
             const searchInput = document.getElementById('main-search');
+            if (!searchInput) return;
             searchInput.addEventListener('input', (e) => {
                 const term = e.target.value.toLowerCase().trim();
                 const serviceCards = document.querySelectorAll('#service-grid .searchable');
@@ -306,8 +319,10 @@
 
         window.resetSearch = () => {
             const searchInput = document.getElementById('main-search');
-            searchInput.value = '';
-            searchInput.dispatchEvent(new Event('input'));
+            if (searchInput) {
+                searchInput.value = '';
+                searchInput.dispatchEvent(new Event('input'));
+            }
         };
 
         window.onload = () => {
