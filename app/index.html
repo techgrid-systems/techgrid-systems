@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Access Denied | TechGrid Systems</title>
+    <title>404 - Page Not Found | TechGrid Systems</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -14,168 +14,94 @@
             background-color: #030712;
             color: #ffffff;
             margin: 0;
+            overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
             min-height: 100vh;
-            overflow: hidden;
-        }
-
-        .security-scan {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, transparent, #ef4444, transparent);
-            animation: scan 3s linear infinite;
-            z-index: 5;
-        }
-
-        @keyframes scan {
-            0% { top: 0%; }
-            100% { top: 100%; }
         }
 
         .grid-background {
             position: absolute;
             inset: 0;
             background-image: 
-                linear-gradient(to right, rgba(239, 68, 68, 0.05) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(239, 68, 68, 0.05) 1px, transparent 1px);
-            background-size: 40px 40px;
-            mask-image: radial-gradient(circle at center, black, transparent 90%);
+                linear-gradient(to right, rgba(37, 99, 235, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(37, 99, 235, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+            mask-image: radial-gradient(circle at center, black, transparent 80%);
             z-index: 0;
         }
 
-        .alert-glow {
+        .glow {
             position: absolute;
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(239, 68, 68, 0.1) 0%, transparent 70%);
-            filter: blur(60px);
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(37, 99, 235, 0.15) 0%, transparent 70%);
+            filter: blur(40px);
             border-radius: 50%;
             z-index: 0;
-            animation: pulse 4s infinite alternate;
+            animation: pulse 8s infinite alternate;
         }
 
         @keyframes pulse {
-            0% { transform: scale(1); opacity: 0.3; }
-            100% { transform: scale(1.2); opacity: 0.6; }
+            0% { transform: scale(1); opacity: 0.5; }
+            100% { transform: scale(1.5); opacity: 0.8; }
         }
 
-        .security-box {
+        .glitch {
+            position: relative;
+            font-size: 10rem;
+            font-weight: 900;
+            letter-spacing: -0.05em;
+            line-height: 1;
+            color: #fff;
+            text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75),
+                         -0.025em -0.05em 0 rgba(0, 255, 0, 0.75),
+                         0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
+            animation: glitch 500ms infinite;
+        }
+
+        @keyframes glitch {
+            0% { text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75), -0.05em -0.025em 0 rgba(0, 255, 0, 0.75), -0.025em 0.05em 0 rgba(0, 0, 255, 0.75); }
+            14% { text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75), -0.05em -0.025em 0 rgba(0, 255, 0, 0.75), -0.025em 0.05em 0 rgba(0, 0, 255, 0.75); }
+            15% { text-shadow: -0.05em -0.025em 0 rgba(255, 0, 0, 0.75), 0.025em 0.025em 0 rgba(0, 255, 0, 0.75), -0.05em -0.05em 0 rgba(0, 0, 255, 0.75); }
+            49% { text-shadow: -0.05em -0.025em 0 rgba(255, 0, 0, 0.75), 0.025em 0.025em 0 rgba(0, 255, 0, 0.75), -0.05em -0.05em 0 rgba(0, 0, 255, 0.75); }
+            50% { text-shadow: 0.025em 0.05em 0 rgba(255, 0, 0, 0.75), 0.05em 0 0 rgba(0, 255, 0, 0.75), 0 -0.05em 0 rgba(0, 0, 255, 0.75); }
+            99% { text-shadow: 0.025em 0.05em 0 rgba(255, 0, 0, 0.75), 0.05em 0 0 rgba(0, 255, 0, 0.75), 0 -0.05em 0 rgba(0, 0, 255, 0.75); }
+            100% { text-shadow: -0.025em 0 0 rgba(255, 0, 0, 0.75), -0.025em -0.025em 0 rgba(0, 255, 0, 0.75), -0.025em -0.05em 0 rgba(0, 0, 255, 0.75); }
+        }
+
+        .content-card {
             position: relative;
             z-index: 10;
-            background: rgba(15, 23, 42, 0.8);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(239, 68, 68, 0.3);
-            border-radius: 24px;
-            padding: 3rem;
-            max-width: 500px;
-            width: 90%;
             text-align: center;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 30px rgba(239, 68, 68, 0.1);
-        }
-
-        .icon-shield {
-            font-size: 4rem;
-            color: #ef4444;
-            margin-bottom: 1.5rem;
-            filter: drop-shadow(0 0 10px rgba(239, 68, 68, 0.5));
-        }
-
-        .status-badge {
-            display: inline-block;
-            background: rgba(239, 68, 68, 0.1);
-            color: #ef4444;
-            font-size: 0.7rem;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-            padding: 0.5rem 1rem;
-            border-radius: 99px;
-            border: 1px solid rgba(239, 68, 68, 0.2);
-            margin-bottom: 1.5rem;
-        }
-
-        .btn-action {
-            display: block;
-            width: 100%;
-            padding: 1rem;
-            border-radius: 12px;
-            font-weight: 800;
-            text-transform: uppercase;
-            font-size: 0.875rem;
-            letter-spacing: 0.05em;
-            transition: all 0.3s ease;
-            margin-top: 1rem;
-        }
-
-        .btn-primary {
-            background-color: #ef4444;
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background-color: #dc2626;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(239, 68, 68, 0.3);
-        }
-
-        .btn-outline {
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: #94a3b8;
-        }
-
-        .btn-outline:hover {
-            background: rgba(255, 255, 255, 0.05);
-            color: white;
-            border-color: rgba(255, 255, 255, 0.3);
+            max-width: 600px;
+            padding: 2rem;
         }
     </style>
 </head>
 <body>
 
-    <div class="security-scan"></div>
     <div class="grid-background"></div>
-    <div class="alert-glow"></div>
+    <div class="glow" style="top: 20%; left: 30%;"></div>
+    <div class="glow" style="bottom: 20%; right: 30%; animation-delay: -4s;"></div>
 
-    <div class="security-box">
-        <div class="mb-4">
-            <span class="text-sm italic font-black tracking-tighter text-slate-400 uppercase">
-                TECHGRID<span class="text-red-500">SYSTEMS</span> SECURITY
+    <div class="content-card">
+        <div class="mb-6">
+            <span class="text-xl italic font-black tracking-tighter text-white uppercase">
+                TECHGRID<span class="text-blue-600">SYSTEMS</span>
             </span>
         </div>
 
-        <div class="icon-shield">
-            <i class="fas fa-shield-alt"></i>
-        </div>
-
-        <div class="status-badge">Access Denied</div>
-
-        <h1 class="text-3xl font-black text-white uppercase tracking-tight mb-4">
-            Unauthorised Request
-        </h1>
+        <h1 class="glitch">404</h1>
         
-        <p class="text-slate-400 font-medium leading-relaxed mb-8 text-sm">
-            Your current account credentials do not have the required permissions to access this directory. If you believe this is an error, please contact your system administrator.
+        <h2 class="text-2xl md:text-3xl font-black uppercase tracking-tight text-white mt-4 mb-4">
+            System Connectivity Lost
+        </h2>
+        
+        <p class="text-slate-400 font-medium leading-relaxed mb-8">
+            The resource you are looking for has been moved, deleted, or is currently unreachable within our grid.
         </p>
-
-        <div class="space-y-3">
-            <a href="https://techgrid-systems.github.io/techgrid-systems/" class="btn-action btn-primary">
-                Return to main menu
-            </a>
-            <a href="https://techgrid-systems.github.io/techgrid-systems/support/" class="btn-action btn-outline">
-                Contact Helpdesk
-            </a>
-        </div>
-
-        <div class="mt-8 pt-6 border-t border-slate-800">
-            <p class="text-[10px] text-slate-600 font-bold uppercase tracking-widest">
-                Error Code: 403_FORBIDDEN_ENTRY
-            </p>
-        </div>
     </div>
 
 </body>
