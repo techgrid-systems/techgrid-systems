@@ -1,6 +1,6 @@
 /**
  * TechGrid Systems - Customer Portal Logic
- * Native plain-text validation
+ * Native plain-text validation and session handling
  */
 
 // Native username and password arrays
@@ -27,7 +27,7 @@ function showMessage(text, isError = true) {
 }
 
 /**
- * Main validation function using native arrays
+ * Main validation function
  */
 function validate() {
     const unField = document.getElementById('username');
@@ -44,7 +44,7 @@ function validate() {
 
     let valid = false;
 
-    // Standard loop validation for plain-text credentials
+    // Validate credentials
     for (let i = 0; i < usernameArray.length; i++) {
         if ((un === usernameArray[i]) && (pw === passwordArray[i])) {
             valid = true;
@@ -54,12 +54,18 @@ function validate() {
 
     if (valid) {
         showMessage("Login successful! Redirecting...", false);
+        
+        // 1. Save session locally so dashboard.html recognizes the user
+        localStorage.setItem('techgrid_user', un);
+        
+        // 2. Redirect to dashboard.html with the username in the URL as a backup
         setTimeout(() => {
-            window.location = "home.html?username=" + username;";
+            window.location.href = "home.html?username=" + encodeURIComponent(un);
         }, 800);
         return;
     }
 
+    // Handle failed attempts
     if (count >= 1) {
         showMessage(`Invalid credentials. ${count} attempts remaining.`);
         count--;
