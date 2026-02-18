@@ -26,6 +26,7 @@
             border: 1px solid #e2e8f0;
             transition: all 0.2s ease;
             cursor: pointer;
+            height: 100%;
         }
         
         .service-card:hover {
@@ -37,23 +38,6 @@
         .tab-content { animation: fadeIn 0.3s ease-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
 
-        .form-selection-card {
-            background: white;
-            border-radius: 8px;
-            padding: 2.5rem 2rem;
-            text-align: center;
-            transition: all 0.2s ease;
-            cursor: pointer;
-            border: 2px solid transparent;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        }
-
-        .form-selection-card:hover {
-            border-color: #3b82f6;
-            transform: translateY(-4px);
-            box-shadow: 0 12px 20px -5px rgba(0, 0, 0, 0.1);
-        }
-
         .hidden-search-result {
             display: none !important;
         }
@@ -63,25 +47,10 @@
             border-bottom: 2px solid #60a5fa;
         }
 
-        .form-input {
-            width: 100%;
-            padding: 0.75rem;
-            border: 1px solid #e2e8f0;
-            border-radius: 6px;
-            font-size: 0.875rem;
-            outline: none;
-            transition: border-color 0.2s;
-        }
-
-        .form-input:focus {
-            border-color: #3b82f6;
-            ring: 2px solid rgba(59, 130, 246, 0.1);
-        }
-
         .loading-overlay {
             position: fixed;
             inset: 0;
-            background: rgba(255,255,255,0.8);
+            background: #1e293b;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -92,7 +61,10 @@
 <body class="min-h-screen flex flex-col">
 
     <div id="loading" class="loading-overlay">
-        <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+        <div class="flex flex-col items-center">
+            <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mb-4"></div>
+            <span class="text-white text-[10px] font-black uppercase tracking-widest opacity-50">Authenticating Session</span>
+        </div>
     </div>
 
     <!-- TOP HEADER -->
@@ -103,8 +75,8 @@
                 <span class="text-[10px] tracking-[0.3em] uppercase opacity-70">Systems</span>
             </div>
             
-            <nav class="hidden md:flex items-center space-x-6 text-xs uppercase tracking-widest font-medium opacity-80 h-full">
-                <button onclick="switchTab('dashboard')" class="nav-link h-16 hover:text-blue-400 flex items-center px-2 transition-all"><i class="fas fa-home mr-2"></i> Home</button>
+            <nav class="hidden lg:flex items-center space-x-6 text-xs uppercase tracking-widest font-medium opacity-80 h-full">
+                <button onclick="switchTab('dashboard')" class="nav-link h-16 hover:text-blue-400 flex items-center px-2 transition-all active"><i class="fas fa-home mr-2"></i> Home</button>
                 <button onclick="switchTab('new-request')" class="nav-link h-16 hover:text-blue-400 flex items-center px-2 transition-all"><i class="fas fa-plus-circle mr-2"></i> New Request</button>
                 <button onclick="switchTab('tickets')" class="nav-link h-16 hover:text-blue-400 flex items-center px-2 transition-all"><i class="fas fa-file-alt mr-2"></i> My Requests</button>
                 <button onclick="switchTab('kb')" class="nav-link h-16 hover:text-blue-400 flex items-center px-2 transition-all"><i class="fas fa-lightbulb mr-2"></i> Solutions</button>
@@ -112,22 +84,25 @@
         </div>
 
         <div class="flex items-center space-x-4">
-            <div id="user-display" class="hidden md:flex items-center text-[10px] bg-slate-800/50 border border-slate-700 px-3 py-1.5 rounded-full text-slate-300 font-medium">
+            <div id="user-display" class="hidden md:flex items-center text-[10px] bg-slate-800/50 border border-slate-700 px-3 py-1.5 rounded-full text-slate-300 font-bold tracking-wider">
                 <i class="fas fa-user-circle mr-2 text-blue-400"></i>
-                <span id="user-name-text">Guest</span>
+                <span id="user-name-text">LOADING...</span>
             </div>
-            <button onclick="switchTab('new-request')" class="bg-[#ef4444] hover:bg-red-600 text-[10px] font-bold uppercase px-4 py-2 rounded-md flex items-center transition">
+            <button onclick="logout()" class="text-slate-400 hover:text-white transition-colors p-2">
+                <i class="fas fa-sign-out-alt"></i>
+            </button>
+            <button onclick="switchTab('new-request')" class="bg-[#ef4444] hover:bg-red-600 text-[10px] font-bold uppercase px-4 py-2 rounded-md flex items-center transition shadow-lg shadow-red-900/20">
                 <i class="fas fa-headset mr-2"></i> New Request
             </button>
         </div>
     </header>
 
     <!-- HERO SEARCH -->
-    <section class="hero-bg h-64 flex flex-col items-center justify-center text-white px-6">
-        <h1 class="text-3xl font-light mb-6" id="hero-title">Welcome. How can we help?</h1>
+    <section class="hero-bg h-72 flex flex-col items-center justify-center text-white px-6">
+        <h1 class="text-3xl font-light mb-8" id="hero-title">Welcome. How can we help?</h1>
         <div class="relative w-full max-w-4xl">
             <i class="fas fa-search absolute left-5 top-1/2 -translate-y-1/2 text-slate-400"></i>
-            <input id="main-search" type="text" placeholder="Find help, services and solutions (e.g. 'laptop', 'new user', 'vpn')" class="w-full py-4 pl-14 pr-6 rounded-md text-slate-800 focus:outline-none focus:ring-4 focus:ring-blue-500/30 shadow-2xl">
+            <input id="main-search" type="text" placeholder="Find help, services and solutions (e.g. 'laptop', 'new user', 'vpn')" class="w-full py-5 pl-14 pr-6 rounded-md text-slate-800 focus:outline-none focus:ring-4 focus:ring-blue-500/30 shadow-2xl text-lg">
         </div>
     </section>
 
@@ -136,34 +111,55 @@
         
         <!-- DASHBOARD TAB -->
         <div id="tab-dashboard" class="tab-content">
-            <div id="service-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                <div onclick="switchTab('new-request')" class="service-card p-6 flex items-start space-x-6 searchable" data-search="it support hardware software help technical repair fix">
-                    <div class="text-blue-600 text-4xl pt-1"><i class="fas fa-cog"></i></div>
-                    <div>
-                        <h3 class="font-bold text-slate-800">IT Support</h3>
-                        <p class="text-xs text-slate-400 mt-1">Need help with your hardware or software?</p>
-                    </div>
+            <div id="service-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Row 1 -->
+                <div onclick="switchTab('new-request')" class="service-card p-8 flex flex-col items-center text-center searchable" data-search="it support hardware software help technical repair fix">
+                    <div class="text-blue-600 text-5xl mb-6"><i class="fas fa-cog"></i></div>
+                    <h3 class="font-bold text-slate-800 mb-2">IT Support</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">Need help with your hardware or software?</p>
                 </div>
-                <div onclick="switchTab('kb')" class="service-card p-6 flex items-start space-x-6 searchable" data-search="accounting finance payment billing invoice money salary payroll">
-                    <div class="text-blue-600 text-4xl pt-1"><i class="fas fa-hand-holding-usd"></i></div>
-                    <div>
-                        <h3 class="font-bold text-slate-800">Accounting & Finance</h3>
-                        <p class="text-xs text-slate-400 mt-1">Have a request related to payment or finance?</p>
-                    </div>
+
+                <div onclick="switchTab('kb')" class="service-card p-8 flex flex-col items-center text-center searchable" data-search="accounting finance payment billing invoice money salary payroll">
+                    <div class="text-blue-600 text-5xl mb-6"><i class="fas fa-hand-holding-usd"></i></div>
+                    <h3 class="font-bold text-slate-800 mb-2">Accounting & Finance</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">Have a request related to payment or finance?</p>
                 </div>
-                <div class="service-card p-6 flex items-start space-x-6 searchable" data-search="schedule project timeline book session calendar meeting">
-                    <div class="text-blue-600 text-4xl pt-1"><i class="fas fa-th"></i></div>
-                    <div>
-                        <h3 class="font-bold text-slate-800">Schedule</h3>
-                        <p class="text-xs text-slate-400 mt-1">Check project timelines and book sessions.</p>
-                    </div>
+
+                <div class="service-card p-8 flex flex-col items-center text-center searchable" data-search="schedule project timeline book session calendar meeting">
+                    <div class="text-blue-600 text-5xl mb-6"><i class="fas fa-th"></i></div>
+                    <h3 class="font-bold text-slate-800 mb-2">Schedule</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">Check project timelines and book sessions.</p>
                 </div>
-                <div class="service-card p-6 flex items-start space-x-6 searchable" data-search="communication phone email chat team slack voip">
-                    <div class="text-blue-600 text-4xl pt-1"><i class="fas fa-comment"></i></div>
-                    <div>
-                        <h3 class="font-bold text-slate-800">Communication</h3>
-                        <p class="text-xs text-slate-400 mt-1">Have a request related to communications?</p>
-                    </div>
+
+                <div class="service-card p-8 flex flex-col items-center text-center searchable" data-search="communication phone email chat team slack voip">
+                    <div class="text-blue-600 text-5xl mb-6"><i class="fas fa-comment"></i></div>
+                    <h3 class="font-bold text-slate-800 mb-2">Communication</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">Have a request related to communications?</p>
+                </div>
+
+                <!-- Row 2 -->
+                <div class="service-card p-8 flex flex-col items-center text-center searchable" data-search="facilities building office desk light maintenance campus">
+                    <div class="text-blue-600 text-5xl mb-6"><i class="fas fa-building"></i></div>
+                    <h3 class="font-bold text-slate-800 mb-2">Campus Facilities</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">Have a request related to campus facilities?</p>
+                </div>
+
+                <div class="service-card p-8 flex flex-col items-center text-center searchable" data-search="hr human resources job employee leave holiday benefits">
+                    <div class="text-blue-600 text-5xl mb-6"><i class="fas fa-users"></i></div>
+                    <h3 class="font-bold text-slate-800 mb-2">Human Resources</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">Open a ticket with Human Resources</p>
+                </div>
+
+                <div class="service-card p-8 flex flex-col items-center text-center searchable" data-search="training learn skill course education session">
+                    <div class="text-blue-600 text-5xl mb-6"><i class="fas fa-chalkboard-teacher"></i></div>
+                    <h3 class="font-bold text-slate-800 mb-2">Training</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">Schedule a training session</p>
+                </div>
+
+                <div class="service-card p-8 flex flex-col items-center text-center searchable" data-search="suggestion feedback improve idea">
+                    <div class="text-blue-600 text-5xl mb-6"><i class="fas fa-coffee"></i></div>
+                    <h3 class="font-bold text-slate-800 mb-2">Suggestions</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">Do you have a suggestion?</p>
                 </div>
             </div>
             
@@ -181,52 +177,11 @@
                     <h2 class="text-2xl font-bold text-slate-800">Select Request Type</h2>
                     <p class="text-slate-500 mt-1">Choose the form that best matches your needs.</p>
                 </div>
-                <div id="request-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <div onclick="openForm('starter')" class="form-selection-card">
-                        <div class="h-16 w-16 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center text-2xl mx-auto mb-4">
-                            <i class="fas fa-user-plus"></i>
-                        </div>
-                        <h3 class="font-bold text-slate-800 uppercase text-xs tracking-widest">New Starter</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div onclick="openForm('general')" class="bg-white border p-10 rounded text-center cursor-pointer hover:border-blue-500 transition shadow-sm">
+                        <i class="fas fa-question text-3xl text-slate-400 mb-4"></i>
+                        <h3 class="font-bold uppercase text-xs tracking-widest text-slate-700">General Help</h3>
                     </div>
-                    <div onclick="openForm('hardware')" class="form-selection-card">
-                        <div class="h-16 w-16 bg-orange-50 text-orange-600 rounded-full flex items-center justify-center text-2xl mx-auto mb-4">
-                            <i class="fas fa-laptop"></i>
-                        </div>
-                        <h3 class="font-bold text-slate-800 uppercase text-xs tracking-widest">Hardware Request</h3>
-                    </div>
-                    <div onclick="openForm('account')" class="form-selection-card">
-                        <div class="h-16 w-16 bg-purple-50 text-purple-600 rounded-full flex items-center justify-center text-2xl mx-auto mb-4">
-                            <i class="fas fa-key"></i>
-                        </div>
-                        <h3 class="font-bold text-slate-800 uppercase text-xs tracking-widest">Account Change</h3>
-                    </div>
-                    <div onclick="openForm('general')" class="form-selection-card">
-                        <div class="h-16 w-16 bg-slate-50 text-slate-600 rounded-full flex items-center justify-center text-2xl mx-auto mb-4">
-                            <i class="fas fa-question"></i>
-                        </div>
-                        <h3 class="font-bold text-slate-800 uppercase text-xs tracking-widest">General Ticket</h3>
-                    </div>
-                </div>
-            </div>
-
-            <!-- DYNAMIC FORM CONTAINER -->
-            <div id="form-container" class="hidden max-w-2xl bg-white border border-slate-200 rounded-lg shadow-sm">
-                <div class="p-6 border-b border-slate-100 flex items-center justify-between">
-                    <div class="flex items-center">
-                        <button onclick="closeForm()" class="mr-4 text-slate-400 hover:text-slate-600 transition">
-                            <i class="fas fa-arrow-left"></i>
-                        </button>
-                        <h3 id="active-form-title" class="font-bold text-slate-800">Form Name</h3>
-                    </div>
-                </div>
-                <div class="p-8">
-                    <form id="active-form" onsubmit="handleFormSubmit(event)">
-                        <div id="form-fields" class="space-y-6"></div>
-                        <div class="mt-8 pt-6 border-t border-slate-100 flex justify-end space-x-3">
-                            <button type="button" onclick="closeForm()" class="px-6 py-2 text-xs font-bold uppercase text-slate-500 hover:text-slate-800">Cancel</button>
-                            <button id="submit-btn" type="submit" class="bg-blue-600 text-white px-8 py-2 rounded text-xs font-bold uppercase hover:bg-blue-700">Submit Request</button>
-                        </div>
-                    </form>
                 </div>
             </div>
         </div>
@@ -234,167 +189,83 @@
         <!-- TICKETS TAB -->
         <div id="tab-tickets" class="tab-content hidden">
             <div class="bg-white border border-slate-200 rounded-lg overflow-hidden">
-                <div class="p-6 border-b border-slate-100 flex justify-between items-center">
-                    <h3 class="font-bold text-slate-800">My Support Requests</h3>
-                </div>
                 <div id="ticket-list" class="divide-y divide-slate-50">
-                    <div class="p-12 text-center text-slate-400">Loading your requests...</div>
+                    <div class="p-12 text-center text-slate-400 font-medium">Fetching your request history...</div>
                 </div>
             </div>
         </div>
 
-        <!-- KB TAB -->
-        <div id="tab-kb" class="tab-content hidden">
-            <div class="bg-white p-8 rounded-lg border border-slate-200">
-                <h3 class="font-bold text-lg mb-4">Popular Solutions</h3>
-                <ul class="space-y-4 text-sm text-blue-600">
-                    <li>Setting up your new VoIP phone</li>
-                    <li>Connecting to the Office VPN</li>
-                    <li>Resetting your TechGrid password</li>
-                </ul>
-            </div>
-        </div>
     </main>
 
-    <footer class="bg-white border-t border-slate-200 py-8 px-12 text-center text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-auto">
-        &copy; 2024 TechGrid Systems - Managed IT Operations Center
+    <footer class="bg-white border-t border-slate-200 py-8 px-12 text-center text-[10px] font-black text-slate-400 uppercase tracking-[0.3em] mt-auto">
+        &copy; 2024 TechGrid Systems - Managed Operations Center
     </footer>
 
     <script>
-        // CLIENT-SIDE SESSION SYNC (REPLACING FIREBASE)
-        const FORMS_CONFIG = {
-            starter: {
-                title: "New Starter Onboarding",
-                fields: [
-                    { id: "subject", label: "Employee Name", type: "text", placeholder: "Jane Doe" },
-                    { id: "dept", label: "Department", type: "select", options: ["Engineering", "Finance", "HR", "Sales"] },
-                    { id: "date", label: "Start Date", type: "date" }
-                ]
-            },
-            hardware: {
-                title: "Hardware Upgrade",
-                fields: [
-                    { id: "subject", label: "Device Required", type: "select", options: ["Laptop", "Monitor", "Keyboard"] },
-                    { id: "justification", label: "Reason", type: "textarea" }
-                ]
-            },
-            account: {
-                title: "Account Permission Change",
-                fields: [
-                    { id: "subject", label: "System Name", type: "text" },
-                    { id: "access", label: "Type", type: "select", options: ["Increase", "Remove"] }
-                ]
-            },
-            general: {
-                title: "General Support Ticket",
-                fields: [
-                    { id: "subject", label: "Issue Summary", type: "text" },
-                    { id: "desc", label: "Details", type: "textarea" }
-                ]
-            }
-        };
-
-        // Sync with Login Portal logic
+        // SESSION MANAGEMENT
         function syncUserSession() {
-            // Check URL for direct redirects, then fallback to LocalStorage used by your custom JS login
+            // Priority 1: Check URL (if redirected from login with ?username=...)
             const params = new URLSearchParams(window.location.search);
-            const queryName = params.get('username');
-            const storedName = localStorage.getItem('techgrid_username') || localStorage.getItem('username');
+            let user = params.get('username');
             
-            const finalName = queryName || storedName || "Guest User";
-            
-            // Display name in header
-            document.getElementById('user-name-text').innerText = `USER: ${finalName.toUpperCase()}`;
-            document.getElementById('user-display').classList.remove('hidden');
-            
-            // Hide loader after session sync
-            setTimeout(() => {
-                document.getElementById('loading').classList.add('hidden');
-            }, 500);
+            // Priority 2: Check LocalStorage (The most common keys used by custom JS logins)
+            if (!user) {
+                user = localStorage.getItem('techgrid_user') || 
+                       localStorage.getItem('username') || 
+                       localStorage.getItem('currentUser');
+            }
 
-            // If "Guest User" and we expect a login, you could redirect back:
-            // if (finalName === "Guest User") window.location.href = "https://techgrid-systems.github.io/techgrid-systems/client-area/login";
+            const nameElement = document.getElementById('user-name-text');
+            
+            if (user && user !== "null") {
+                // Clean up any JSON string quotes if the login script saved it using stringify
+                const cleanName = user.replace(/['"]+/g, '');
+                nameElement.innerText = `USER: ${cleanName.toUpperCase()}`;
+                
+                // Hide loader
+                setTimeout(() => {
+                    document.getElementById('loading').classList.add('hidden');
+                }, 800);
+            } else {
+                // Not logged in - redirect back to login page
+                window.location.href = "../login";
+            }
         }
+
+        window.logout = () => {
+            localStorage.removeItem('techgrid_user');
+            localStorage.removeItem('username');
+            window.location.href = "../login";
+        };
 
         window.switchTab = (tabName) => {
             document.querySelectorAll('.tab-content').forEach(tab => tab.classList.add('hidden'));
             document.getElementById(`tab-${tabName}`).classList.remove('hidden');
-            const titles = {
-                'dashboard': 'Welcome. How can we help?',
-                'new-request': 'Open a New Service Request',
-                'tickets': 'Track Your Active Requests',
-                'kb': 'Self-Service Knowledge Base'
-            };
-            document.getElementById('hero-title').innerText = titles[tabName] || titles['dashboard'];
+            
+            const heroTitle = document.getElementById('hero-title');
+            if(tabName === 'dashboard') heroTitle.innerText = "Welcome. How can we help?";
+            else if(tabName === 'new-request') heroTitle.innerText = "Submit a New Service Request";
+            else if(tabName === 'tickets') heroTitle.innerText = "Track Your Support History";
+            else if(tabName === 'kb') heroTitle.innerText = "Search Our Knowledge Base";
+
             document.querySelectorAll('.nav-link').forEach(link => {
                 link.classList.remove('active');
                 if (link.getAttribute('onclick')?.includes(tabName)) link.classList.add('active');
             });
-            if (tabName === 'new-request') window.closeForm();
+            
             if (tabName === 'tickets') renderMockTickets();
         };
-
-        window.openForm = (formKey) => {
-            const formData = FORMS_CONFIG[formKey];
-            document.getElementById('request-selection-view').classList.add('hidden');
-            document.getElementById('form-container').classList.remove('hidden');
-            document.getElementById('active-form-title').innerText = formData.title;
-            const fieldsContainer = document.getElementById('form-fields');
-            fieldsContainer.innerHTML = formData.fields.map(field => {
-                let inputHtml = '';
-                if (field.type === 'text' || field.type === 'date') {
-                    inputHtml = `<input id="field-${field.id}" type="${field.type}" class="form-input" placeholder="${field.placeholder || ''}" required>`;
-                } else if (field.type === 'select') {
-                    inputHtml = `<select id="field-${field.id}" class="form-input">
-                        ${field.options.map(opt => `<option value="${opt}">${opt}</option>`).join('')}
-                    </select>`;
-                } else if (field.type === 'textarea') {
-                    inputHtml = `<textarea id="field-${field.id}" class="form-input min-h-[100px]" placeholder="${field.placeholder || ''}" required></textarea>`;
-                }
-                return `<div><label class="block text-xs font-bold uppercase text-slate-400 mb-2">${field.label}</label>${inputHtml}</div>`;
-            }).join('');
-            window.activeFormKey = formKey;
-        };
-
-        window.closeForm = () => {
-            document.getElementById('request-selection-view').classList.remove('hidden');
-            document.getElementById('form-container').classList.add('hidden');
-        };
-
-        window.handleFormSubmit = (e) => {
-            e.preventDefault();
-            const submitBtn = document.getElementById('submit-btn');
-            submitBtn.disabled = true;
-            submitBtn.innerText = "Processing...";
-            
-            // In a non-firebase environment, you would POST this to your API
-            // For now, we simulate success and show it in the ticket list
-            setTimeout(() => {
-                const subject = document.getElementById('field-subject')?.value || "General Request";
-                saveMockTicket(subject);
-                window.switchTab('tickets');
-                submitBtn.disabled = false;
-                submitBtn.innerText = "Submit Request";
-            }, 1000);
-        };
-
-        function saveMockTicket(subject) {
-            const tickets = JSON.parse(localStorage.getItem('tg_mock_tickets') || '[]');
-            tickets.push({
-                id: Math.random().toString(36).substr(2, 9).toUpperCase(),
-                subject: subject,
-                status: 'Awaiting Agent',
-                date: new Date().toLocaleDateString()
-            });
-            localStorage.setItem('tg_mock_tickets', JSON.stringify(tickets));
-        }
 
         function renderMockTickets() {
             const list = document.getElementById('ticket-list');
             const tickets = JSON.parse(localStorage.getItem('tg_mock_tickets') || '[]');
             
             if (tickets.length === 0) {
-                list.innerHTML = `<div class="p-12 text-center text-slate-400">No requests found. Start by opening a new request.</div>`;
+                list.innerHTML = `
+                    <div class="p-20 text-center flex flex-col items-center">
+                        <i class="fas fa-clipboard-list text-slate-100 text-6xl mb-4"></i>
+                        <p class="text-slate-400 font-bold uppercase tracking-widest text-xs">No Active Requests Found</p>
+                    </div>`;
                 return;
             }
             
@@ -404,8 +275,8 @@
                         <span class="text-[9px] font-black text-slate-400 uppercase">#${t.id}</span>
                         <span class="font-bold text-slate-800">${t.subject}</span>
                     </div>
-                    <div class="flex items-center space-x-4">
-                        <span class="text-[9px] font-black px-2 py-1 rounded bg-blue-50 text-blue-600 uppercase">${t.status}</span>
+                    <div class="flex items-center space-x-6">
+                        <span class="text-[9px] font-black px-3 py-1.5 rounded-full bg-blue-50 text-blue-600 uppercase tracking-tighter">${t.status}</span>
                         <i class="fas fa-chevron-right text-slate-300 text-xs"></i>
                     </div>
                 </div>
@@ -418,6 +289,7 @@
                 const term = e.target.value.toLowerCase().trim();
                 const serviceCards = document.querySelectorAll('#service-grid .searchable');
                 let serviceFound = false;
+                
                 serviceCards.forEach(card => {
                     const content = (card.innerText + " " + card.getAttribute('data-search')).toLowerCase();
                     if (content.includes(term)) {
@@ -427,6 +299,7 @@
                         card.classList.add('hidden-search-result');
                     }
                 });
+                
                 document.getElementById('search-no-results').classList.toggle('hidden', serviceFound || term === '');
             });
         }
@@ -437,7 +310,6 @@
             searchInput.dispatchEvent(new Event('input'));
         };
 
-        // Initialize session on load
         window.onload = () => {
             syncUserSession();
             setupSearch();
