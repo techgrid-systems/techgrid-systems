@@ -5,8 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us | Techgrid Systems</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
         :root {
             --brand-primary: #2563eb; /* TechGrid Blue */
@@ -19,9 +20,12 @@
             color: #334155;
             margin: 0;
             padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
 
-        /* Top Header Shapes - Replicated from reference image style */
+        /* Top Header Shapes */
         .header-bg {
             position: relative;
             height: 200px;
@@ -133,6 +137,51 @@
             color: #1d4ed8;
             text-decoration: underline;
         }
+
+        /* Footer Styling */
+        .footer-logo-container {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .footer-logo-img {
+            height: 32px; /* Slightly reduced height to align better with text */
+            width: auto;
+            object-fit: contain;
+        }
+
+        .footer-logo-text {
+            font-weight: 700;
+            font-size: 0.95rem; /* Matches .footer-link size */
+            letter-spacing: 0.025em;
+            color: #1e293b;
+            text-transform: uppercase;
+        }
+
+        .footer-logo-text span {
+            color: var(--brand-primary);
+        }
+        
+        .footer-heading {
+            color: #1e293b;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .footer-link {
+            color: #64748b;
+            transition: color 0.2s;
+            display: block;
+            margin-bottom: 0.75rem;
+            text-decoration: none;
+            font-size: 0.95rem;
+        }
+
+        .footer-link:hover {
+            color: var(--brand-primary);
+        }
     </style>
 </head>
 <body>
@@ -155,7 +204,7 @@
     </div>
 
     <!-- Main Section -->
-    <main class="container mx-auto max-w-6xl px-6 py-12">
+    <main class="container mx-auto max-w-6xl px-6 py-12 flex-grow">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
             
             <!-- Left Side: Contact Text -->
@@ -253,9 +302,95 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </main>
+
+    <!-- Footer Section -->
+    <footer class="bg-white border-t border-slate-100 pt-20 pb-10">
+        <div class="container mx-auto max-w-6xl px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+                
+                <!-- Brand Column -->
+                <div class="space-y-6">
+                    <div class="footer-logo-container">
+                        <img src="https://techgrid-systems.github.io/techgrid-systems-logo/tgs.jpg" alt="Techgrid Logo" class="footer-logo-img">
+                        <div class="footer-logo-text">TECHGRID<span>SYSTEMS</span></div>
+                    </div>
+                    <p class="text-slate-500 text-sm leading-relaxed pr-4">
+                        Enterprise Infrastructure & Digital Resilience. Empowering businesses through advanced connectivity and automation.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center text-slate-400 hover:bg-blue-600 hover:text-white transition">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center text-slate-400 hover:bg-blue-600 hover:text-white transition">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center text-slate-400 hover:bg-blue-600 hover:text-white transition">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Services Column -->
+                <div>
+                    <h4 class="footer-heading">Services</h4>
+                    <nav>
+                        <a href="#" class="footer-link">Connectivity</a>
+                        <a href="#" class="footer-link">Infrastructure</a>
+                        <a href="#" class="footer-link">Managed Ops</a>
+                        <a href="#" class="footer-link">Cloud Integrations</a>
+                        <a href="#" class="footer-link">Automation</a>
+                    </nav>
+                </div>
+
+                <!-- Company Column -->
+                <div>
+                    <h4 class="footer-heading">Company</h4>
+                    <nav>
+                        <a href="#" class="footer-link">About Us</a>
+                        <a href="#" class="footer-link">Our Expertise</a>
+                        <a href="#" class="footer-link">Case Studies</a>
+                        <a href="#" class="footer-link">Security Standards</a>
+                        <a href="#" class="footer-link">Careers</a>
+                    </nav>
+                </div>
+
+                <!-- Contact Column -->
+                <div>
+                    <h4 class="footer-heading">Office</h4>
+                    <div class="space-y-4">
+                        <div class="flex items-start space-x-3">
+                            <i class="fas fa-map-marker-alt text-blue-600 mt-1"></i>
+                            <span class="text-sm text-slate-600">
+                                10 Ricardo Path, Thamesmead,<br>
+                                London, SE28 8AQ
+                            </span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-phone-alt text-blue-600"></i>
+                            <span class="text-sm text-slate-600">0208 311 2496</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-envelope text-blue-600"></i>
+                            <span class="text-sm text-slate-600">support@techgrid-systems.org.uk</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Bottom Copyright -->
+            <div class="pt-8 border-t border-slate-100 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0 text-slate-400 text-xs font-medium">
+                <p>&copy; 2024 Techgrid Systems Ltd. All rights reserved.</p>
+                <div class="flex space-x-8">
+                    <a href="#" class="hover:text-blue-600">Privacy Policy</a>
+                    <a href="#" class="hover:text-blue-600">Terms of Service</a>
+                    <a href="#" class="hover:text-blue-600">SLA</a>
+                </div>
+            </div>
+        </div>
+    </footer>
 
     <script>
         const form = document.getElementById('contact-form');
@@ -271,7 +406,6 @@
             setTimeout(() => {
                 form.style.display = 'none';
                 successUI.style.display = 'block';
-                console.log("Transmission Successful");
             }, 1200);
         });
     </script>
