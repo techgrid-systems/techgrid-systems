@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Enquiry | Techgrid Systems</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+        :root {
+            --brand-primary: #2563eb; /* TechGrid Blue */
+            --brand-dark: #0f172a;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #ffffff;
+            color: #334155;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Top Header Shapes */
+        .header-bg {
+            position: relative;
+            height: 220px;
+            width: 100%;
+            overflow: hidden;
+            background-color: #fff;
+        }
+
+        .shape-blue-light {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background-color: #eff6ff;
+            clip-path: polygon(0 0, 100% 0, 100% 60%, 0 100%);
+            z-index: 1;
+        }
+
+        .shape-blue-primary {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50%;
+            height: 120px;
+            background-color: var(--brand-primary);
+            clip-path: polygon(0 0, 100% 0, 80% 100%, 0 80%);
+            z-index: 2;
+        }
+
+        .shape-black {
+            position: absolute;
+            top: 140px;
+            right: 0;
+            width: 40%;
+            height: 60px;
+            background-color: var(--brand-dark);
+            clip-path: polygon(20% 0, 100% 0, 100% 100%, 0 100%);
+            z-index: 2;
+        }
+
+        /* Header Text Box */
+        .header-content {
+            position: relative;
+            z-index: 10;
+            margin-top: -130px;
+            text-align: center;
+        }
+
+        .info-box {
+            background: white;
+            padding: 2rem;
+            max-width: 750px;
+            margin: 2rem auto;
+            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        /* Form Elements */
+        .form-card {
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+        }
+
+        .input-field {
+            background-color: white;
+            border: 1px solid #cbd5e1;
+            padding: 0.75rem;
+            width: 100%;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            font-size: 0.95rem;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: var(--brand-primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .btn-submit {
+            background-color: var(--brand-primary);
+            color: white;
+            padding: 1rem 3rem;
+            border-radius: 8px;
+            font-weight: 700;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            width: 100%;
+            justify-content: center;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .btn-submit:hover {
+            background-color: #1d4ed8;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+        }
+
+        #success-ui {
+            display: none;
+        }
+
+        .step-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            background: var(--brand-primary);
+            color: white;
+            border-radius: 50%;
+            font-size: 12px;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        /* Footer Styling */
+        .footer-logo-container {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .footer-logo-img {
+            height: 32px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .footer-logo-text {
+            font-weight: 700;
+            font-size: 0.95rem;
+            letter-spacing: 0.025em;
+            color: #1e293b;
+            text-transform: uppercase;
+        }
+
+        .footer-logo-text span {
+            color: var(--brand-primary);
+        }
+        
+        .footer-heading {
+            color: #1e293b;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .footer-link {
+            color: #64748b;
+            transition: color 0.2s;
+            display: block;
+            margin-bottom: 0.75rem;
+            text-decoration: none;
+            font-size: 0.95rem;
+        }
+
+        .footer-link:hover {
+            color: var(--brand-primary);
+        }
+
+        .benefit-card {
+            border-left: 3px solid var(--brand-primary);
+            padding-left: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Visual Header Decorations -->
+    <div class="header-bg">
+        <div class="shape-blue-light"></div>
+        <div class="shape-blue-primary"></div>
+        <div class="shape-black"></div>
+    </div>
+
+    <div class="header-content">
+        <h1 class="text-5xl font-extrabold text-slate-900 mb-6 tracking-tight">Service Enquiry</h1>
+        <div class="info-box">
+            <p class="text-slate-600 leading-relaxed font-medium text-lg">
+                Ready to upgrade your infrastructure? Provide some initial details below. 
+                Our engineering team will review your requirements and provide a tailored technical proposal.
+            </p>
+        </div>
+    </div>
+
+    <!-- Main Section -->
+    <main class="container mx-auto max-w-6xl px-6 py-12 flex-grow">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
+            
+            <!-- Left Side: Why Enquire -->
+            <div class="lg:col-span-5 space-y-12">
+                <section>
+                    <h2 class="text-3xl font-bold text-slate-900 mb-6">Why Partner With Us?</h2>
+                    <div class="space-y-8">
+                        <div class="benefit-card">
+                            <h3 class="font-bold text-slate-900 text-lg">Direct Engineer Access</h3>
+                            <p class="text-slate-500 text-sm mt-1">Skip the sales team. Your enquiry goes directly to our technical systems architects for immediate feasibility review.</p>
+                        </div>
+                        <div class="benefit-card">
+                            <h3 class="font-bold text-slate-900 text-lg">Rapid Response SLA</h3>
+                            <p class="text-slate-500 text-sm mt-1">We acknowledge all business enquiries within 4 working hours with a clear roadmap for next steps.</p>
+                        </div>
+                        <div class="benefit-card">
+                            <h3 class="font-bold text-slate-900 text-lg">Resilient by Design</h3>
+                            <p class="text-slate-500 text-sm mt-1">Our solutions focus on zero-downtime migrations and long-term digital scalability.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="bg-slate-50 p-6 rounded-xl border border-slate-100">
+                    <h3 class="font-bold text-slate-900 mb-4 flex items-center">
+                        <i class="fas fa-headset text-blue-600 mr-2"></i> Immediate Support
+                    </h3>
+                    <p class="text-sm text-slate-600 mb-4">For urgent technical failures or critical infrastructure outages, please use our priority lines:</p>
+                    <div class="space-y-2">
+                        <p class="text-blue-600 font-bold">Main Office: 0208 311 2496</p>
+                        <p class="text-blue-600 font-bold">Technical: 07487 613 849</p>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Right Side: Enquiry Form -->
+            <div class="lg:col-span-7">
+                <div class="form-card p-8 md:p-10 shadow-lg border-slate-200">
+                    <form id="enquiry-form" class="space-y-8">
+                        
+                        <!-- Section 1: Contact Details -->
+                        <div class="space-y-4">
+                            <h4 class="text-xs uppercase tracking-widest font-bold text-blue-600 flex items-center">
+                                <span class="step-badge">1</span> Primary Contact
+                            </h4>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="space-y-1">
+                                    <label class="text-xs font-bold text-slate-500 ml-1">Full Name</label>
+                                    <input type="text" id="name" required class="input-field" placeholder="e.g. John Smith">
+                                </div>
+                                <div class="space-y-1">
+                                    <label class="text-xs font-bold text-slate-500 ml-1">Company Name</label>
+                                    <input type="text" id="company" required class="input-field" placeholder="e.g. Techgrid Ltd">
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="space-y-1">
+                                    <label class="text-xs font-bold text-slate-500 ml-1">Work Email</label>
+                                    <input type="email" id="email" required class="input-field" placeholder="name@company.com">
+                                </div>
+                                <div class="space-y-1">
+                                    <label class="text-xs font-bold text-slate-500 ml-1">Contact Number</label>
+                                    <input type="tel" id="phone" class="input-field" placeholder="Optional">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Section 2: Project Scope -->
+                        <div class="space-y-4">
+                            <h4 class="text-xs uppercase tracking-widest font-bold text-blue-600 flex items-center">
+                                <span class="step-badge">2</span> Requirement Analysis
+                            </h4>
+                            <div class="space-y-1">
+                                <label class="text-xs font-bold text-slate-500 ml-1">Service Category</label>
+                                <select id="subject" required class="input-field bg-white appearance-none cursor-pointer">
+                                    <option value="" disabled selected>Select the primary service needed...</option>
+                                    <option value="connectivity">Connectivity (Leased Lines/FTTP)</option>
+                                    <option value="infrastructure">Infrastructure (Network/Server)</option>
+                                    <option value="managed-ops">Managed Operations</option>
+                                    <option value="cloud-integrations">Cloud Integrations & Hosting</option>
+                                    <option value="automation">Automation & Scripting</option>
+                                </select>
+                            </div>
+                            <div class="space-y-1">
+                                <label class="text-xs font-bold text-slate-500 ml-1">Project Brief / Current Challenges</label>
+                                <textarea id="message" rows="4" required class="input-field resize-none" placeholder="Please describe your current setup or the goal of this enquiry..."></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Section 3: Timeline -->
+                        <div class="space-y-4">
+                            <h4 class="text-xs uppercase tracking-widest font-bold text-blue-600 flex items-center">
+                                <span class="step-badge">3</span> Project Timeline
+                            </h4>
+                            <div class="flex flex-wrap gap-4">
+                                <label class="flex items-center space-x-2 cursor-pointer group">
+                                    <input type="radio" name="urgency" value="immediate" class="w-4 h-4 text-blue-600">
+                                    <span class="text-sm text-slate-600 group-hover:text-slate-900 transition">Immediate</span>
+                                </label>
+                                <label class="flex items-center space-x-2 cursor-pointer group">
+                                    <input type="radio" name="urgency" value="1-3-months" class="w-4 h-4 text-blue-600" checked>
+                                    <span class="text-sm text-slate-600 group-hover:text-slate-900 transition">1-3 Months</span>
+                                </label>
+                                <label class="flex items-center space-x-2 cursor-pointer group">
+                                    <input type="radio" name="urgency" value="planning" class="w-4 h-4 text-blue-600">
+                                    <span class="text-sm text-slate-600 group-hover:text-slate-900 transition">Planning Phase</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="pt-4">
+                            <button type="submit" id="submit-btn" class="btn-submit">
+                                Submit Formal Enquiry
+                            </button>
+                            <p class="text-[10px] text-slate-400 mt-4 text-center">
+                                By submitting, you agree to our processing of your data to respond to this technical enquiry.
+                            </p>
+                        </div>
+                    </form>
+
+                    <!-- Success Message -->
+                    <div id="success-ui" class="text-center py-12">
+                        <div class="mb-6 inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-50 text-green-600 border border-green-100">
+                            <i class="fas fa-check text-2xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-slate-900 mb-2">Enquiry Logged</h3>
+                        <p class="text-slate-600 mb-8 max-w-sm mx-auto">Reference: <span class="font-mono font-bold">TGS-REQ-2024</span><br>A systems architect will review your brief and contact you shortly.</p>
+                        <button onclick="window.location.reload()" class="text-blue-600 font-bold hover:underline">
+                            Submit another requirement
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="bg-white border-t border-slate-100 pt-20 pb-10">
+        <div class="container mx-auto max-w-6xl px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+                
+                <!-- Brand Column -->
+                <div class="space-y-6">
+                    <div class="footer-logo-container">
+                        <img src="https://techgrid-systems.github.io/techgrid-systems-logo/tgs.jpg" alt="Techgrid Logo" class="footer-logo-img">
+                        <div class="footer-logo-text">TECHGRID<span>SYSTEMS</span></div>
+                    </div>
+                    <p class="text-slate-500 text-sm leading-relaxed pr-4">
+                        Enterprise Infrastructure & Digital Resilience. Empowering businesses through advanced connectivity and automation.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center text-slate-400 hover:bg-blue-600 hover:text-white transition">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center text-slate-400 hover:bg-blue-600 hover:text-white transition">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center text-slate-400 hover:bg-blue-600 hover:text-white transition">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Services Column -->
+                <div>
+                    <h4 class="footer-heading">Services</h4>
+                    <nav>
+                        <a href="#" class="footer-link">Connectivity</a>
+                        <a href="#" class="footer-link">Infrastructure</a>
+                        <a href="#" class="footer-link">Managed Ops</a>
+                        <a href="#" class="footer-link">Cloud Integrations</a>
+                        <a href="#" class="footer-link">Automation</a>
+                    </nav>
+                </div>
+
+                <!-- Company Column -->
+                <div>
+                    <h4 class="footer-heading">Company</h4>
+                    <nav>
+                        <a href="#" class="footer-link">About Us</a>
+                        <a href="#" class="footer-link">Our Expertise</a>
+                        <a href="#" class="footer-link">Case Studies</a>
+                        <a href="#" class="footer-link">Security Standards</a>
+                        <a href="#" class="footer-link">Careers</a>
+                    </nav>
+                </div>
+
+                <!-- Contact Column -->
+                <div>
+                    <h4 class="footer-heading">Office</h4>
+                    <div class="space-y-4">
+                        <div class="flex items-start space-x-3">
+                            <i class="fas fa-map-marker-alt text-blue-600 mt-1"></i>
+                            <span class="text-sm text-slate-600">
+                                10 Ricardo Path, Thamesmead,<br>
+                                London, SE28 8AQ
+                            </span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-phone-alt text-blue-600"></i>
+                            <span class="text-sm text-slate-600">0208 311 2496</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-envelope text-blue-600"></i>
+                            <span class="text-sm text-slate-600">support@techgrid-systems.org.uk</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Bottom Copyright -->
+            <div class="pt-8 border-t border-slate-100 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0 text-slate-400 text-xs font-medium">
+                <p>&copy; 2024 Techgrid Systems Ltd. All rights reserved.</p>
+                <div class="flex space-x-8">
+                    <a href="#" class="hover:text-blue-600">Privacy Policy</a>
+                    <a href="#" class="hover:text-blue-600">Terms of Service</a>
+                    <a href="#" class="hover:text-blue-600">SLA</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const form = document.getElementById('enquiry-form');
+        const successUI = document.getElementById('success-ui');
+        const submitBtn = document.getElementById('submit-btn');
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-circle-notch fa-spin mr-2"></i> Registering Project...';
+
+            // Simulate project registration in system
+            setTimeout(() => {
+                form.style.display = 'none';
+                successUI.style.display = 'block';
+                window.scrollTo({ top: 100, behavior: 'smooth' });
+            }, 1500);
+        });
+    </script>
+</body>
+</html>
