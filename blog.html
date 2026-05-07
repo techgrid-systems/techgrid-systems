@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insights | Techgrid Systems - Enterprise Infrastructure Blog</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+        
+        :root {
+            --brand-primary: #2563eb;
+            --brand-dark: #0f172a;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* --- Mega Menu Logic --- */
+        .dropdown:hover > .mega-menu {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .mega-menu {
+            display: none;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.2s ease-out;
+            z-index: 150;
+        }
+
+        /* --- Accordion Logic --- */
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.3s ease;
+        }
+
+        .accordion-content.active {
+            max-height: 1000px; 
+            padding-bottom: 0.5rem;
+        }
+
+        .rotate-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .rotate-icon.active {
+            transform: rotate(180deg);
+        }
+
+        /* --- Visual Styles --- */
+        .glass {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+
+        .hero-mesh {
+            background-color: #0f172a;
+            background-image: 
+                radial-gradient(at 0% 0%, hsla(220,100%,12%,1) 0, transparent 50%), 
+                radial-gradient(at 50% 0%, hsla(225,80%,18%,1) 0, transparent 50%), 
+                radial-gradient(at 100% 0%, hsla(210,100%,12%,1) 0, transparent 50%);
+        }
+
+        .btn-premium {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .btn-premium:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 24px -10px rgba(37, 99, 235, 0.4);
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #93c5fd 0%, #c7d2fe 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .blog-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .blog-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .footer-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        .footer-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: #3b82f6;
+            transition: width 0.3s ease;
+        }
+        .footer-link:hover {
+            color: #fff;
+        }
+        .footer-link:hover::after {
+            width: 100%;
+        }
+
+        .brand-logo-img {
+            mix-blend-mode: multiply;
+            filter: brightness(1.05);
+        }
+    </style>
+</head>
+<body class="bg-[#fcfdfe] text-slate-900">
+
+    <!-- Navigation -->
+    <nav class="glass border-b border-slate-200/50 sticky top-0 z-[100]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20">
+                <div class="flex items-center">
+                    <a href="index.html" class="flex items-center gap-3 group">
+                        <div class="bg-white p-1 rounded-xl shadow-lg shadow-blue-700/10 group-hover:shadow-blue-700/20 transition-all border border-slate-100">
+                            <img src="https://techgrid-systems.github.io/techgrid-systems-logo/tgs.jpg" alt="Techgrid Systems Logo" class="brand-logo-img h-10 w-10 object-contain rounded-lg">
+                        </div>
+                        <span class="text-2xl font-extrabold text-slate-900 tracking-tight">Techgrid<span class="text-blue-700">Systems</span></span>
+                    </a>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden lg:flex items-center space-x-8">
+                    <a href="#" class="text-slate-500 hover:text-blue-700 font-bold text-[11px] tracking-[0.15em] transition-colors uppercase">Home</a>
+                    
+                    <div class="relative dropdown group h-full flex items-center">
+                        <button class="text-slate-500 hover:text-blue-700 font-bold text-[11px] tracking-[0.15em] flex items-center gap-2 outline-none uppercase">
+                            About <i class="fas fa-chevron-down text-[9px] opacity-40 group-hover:rotate-180 transition-transform"></i>
+                        </button>
+                        <div class="mega-menu absolute top-[80px] -left-10 bg-white border border-slate-200 shadow-2xl rounded-2xl w-56 overflow-hidden">
+                            <div class="p-4 space-y-1">
+                                <a href="#" class="flex items-center gap-3 p-3 hover:bg-slate-50 rounded-xl transition-colors">
+                                    <div class="w-6 h-6 bg-blue-50 text-blue-700 rounded flex items-center justify-center">
+                                        <i class="fas fa-info-circle text-[10px]"></i>
+                                    </div>
+                                    <span class="text-[10px] font-black text-slate-800 tracking-widest uppercase">About Us</span>
+                                </a>
+                                <a href="#" class="flex items-center gap-3 p-3 hover:bg-slate-50 rounded-xl transition-colors">
+                                    <div class="w-6 h-6 bg-blue-50 text-blue-700 rounded flex items-center justify-center">
+                                        <i class="fas fa-briefcase text-[10px]"></i>
+                                    </div>
+                                    <span class="text-[10px] font-black text-slate-800 tracking-widest uppercase">Careers</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="#" class="text-slate-500 hover:text-blue-700 font-bold text-[11px] tracking-[0.15em] transition-colors uppercase">Enterprise</a>
+                    
+                    <div class="relative dropdown group h-full flex items-center">
+                        <button class="text-blue-700 font-bold text-[11px] tracking-[0.15em] flex items-center gap-2 outline-none uppercase">
+                            Insights <i class="fas fa-chevron-down text-[9px] opacity-40 group-hover:rotate-180 transition-transform"></i>
+                        </button>
+                        <div class="mega-menu absolute top-[80px] -left-10 bg-white border border-slate-200 shadow-2xl rounded-2xl w-56 overflow-hidden">
+                            <div class="p-4 space-y-1">
+                                <a href="#" class="flex items-center gap-3 p-3 hover:bg-slate-50 rounded-xl transition-colors">
+                                    <div class="w-6 h-6 bg-slate-100 text-slate-700 rounded flex items-center justify-center">
+                                        <i class="fas fa-newspaper text-[10px]"></i>
+                                    </div>
+                                    <span class="text-[10px] font-black text-slate-800 tracking-widest uppercase">Blog</span>
+                                </a>
+                                <a href="#" class="flex items-center gap-3 p-3 hover:bg-slate-50 rounded-xl transition-colors">
+                                    <div class="w-6 h-6 bg-slate-100 text-slate-700 rounded flex items-center justify-center">
+                                        <i class="fas fa-file-alt text-[10px]"></i>
+                                    </div>
+                                    <span class="text-[10px] font-black text-slate-800 tracking-widest uppercase">Case Studies</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="relative dropdown group h-full flex items-center">
+                        <button class="text-slate-500 hover:text-blue-700 font-bold text-[11px] tracking-[0.15em] flex items-center gap-2 outline-none uppercase">
+                            Solutions <i class="fas fa-chevron-down text-[9px] opacity-40 group-hover:rotate-180 transition-transform"></i>
+                        </button>
+                        
+                        <!-- MEGA MENU START -->
+                        <div class="mega-menu absolute top-[80px] -left-10 bg-white border border-slate-200 shadow-2xl rounded-2xl w-80 overflow-hidden">
+                            <div class="p-5 space-y-2">
+                                <!-- Connectivity Section -->
+                                <div class="border-b border-slate-50 pb-2">
+                                    <button onclick="toggleAccordion('dt-net', 'dt-net-icon')" class="w-full flex items-center justify-between p-3 hover:bg-slate-50 rounded-xl transition-colors text-left">
+                                        <div class="flex items-center gap-3">
+                                            <div class="w-6 h-6 bg-blue-50 text-blue-700 rounded flex items-center justify-center">
+                                                <i class="fas fa-project-diagram text-[10px]"></i>
+                                            </div>
+                                            <span class="text-[10px] font-black text-slate-800 tracking-widest uppercase">Connectivity</span>
+                                        </div>
+                                        <i id="dt-net-icon" class="fas fa-chevron-down rotate-icon text-[10px] text-slate-300"></i>
+                                    </button>
+                                    <div id="dt-net" class="accordion-content pl-12 pr-4">
+                                        <ul class="space-y-2 mt-2">
+                                            <li><a href="#" class="text-xs text-slate-500 hover:text-blue-700 font-semibold block">SD-WAN Architecture</a></li>
+                                            <li><a href="#" class="text-xs text-slate-500 hover:text-blue-700 font-semibold block">Private Fiber Uplinks</a></li>
+                                            <li><a href="#" class="text-xs text-slate-500 hover:text-blue-700 font-semibold block">Enterprise Wireless</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <!-- Infrastructure Section -->
+                                <div class="border-b border-slate-50 pb-2">
+                                    <button onclick="toggleAccordion('dt-infra', 'dt-infra-icon')" class="w-full flex items-center justify-between p-3 hover:bg-slate-50 rounded-xl transition-colors text-left">
+                                        <div class="flex items-center gap-3">
+                                            <div class="w-6 h-6 bg-slate-100 text-slate-700 rounded flex items-center justify-center">
+                                                <i class="fas fa-server text-[10px]"></i>
+                                            </div>
+                                            <span class="text-[10px] font-black text-slate-800 tracking-widest uppercase">Infrastructure</span>
+                                        </div>
+                                        <i id="dt-infra-icon" class="fas fa-chevron-down rotate-icon text-[10px] text-slate-300"></i>
+                                    </button>
+                                    <div id="dt-infra" class="accordion-content pl-12 pr-4">
+                                        <ul class="space-y-2 mt-2">
+                                            <li><a href="#" class="text-xs text-slate-500 hover:text-blue-700 font-semibold block">Data Center Design</a></li>
+                                            <li><a href="#" class="text-xs text-slate-500 hover:text-blue-700 font-semibold block">Access Control Systems</a></li>
+                                            <li><a href="#" class="text-xs text-slate-500 hover:text-blue-700 font-semibold block">Intelligent Workspace</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <!-- Managed Ops Section -->
+                                <div class="pb-1">
+                                    <button onclick="toggleAccordion('dt-support', 'dt-support-icon')" class="w-full flex items-center justify-between p-3 hover:bg-slate-50 rounded-xl transition-colors text-left">
+                                        <div class="flex items-center gap-3">
+                                            <div class="w-6 h-6 bg-blue-900 text-white rounded flex items-center justify-center">
+                                                <i class="fas fa-shield-alt text-[10px]"></i>
+                                            </div>
+                                            <span class="text-[10px] font-black text-slate-800 tracking-widest uppercase">Managed Ops</span>
+                                        </div>
+                                        <i id="dt-support-icon" class="fas fa-chevron-down rotate-icon text-[10px] text-slate-300"></i>
+                                    </button>
+                                    <div id="dt-support" class="accordion-content pl-12 pr-4">
+                                        <ul class="space-y-2 mt-2">
+                                            <li><a href="#" class="text-xs text-slate-500 hover:text-blue-700 font-semibold block">Professional Services</a></li>
+                                            <li><a href="#" class="text-xs text-slate-500 hover:text-blue-700 font-semibold block">Managed IT</a></li>
+                                            <li><a href="#" class="text-xs text-slate-500 hover:text-blue-700 font-semibold block">Cyber Security</a></li>
+                                            <li><a href="#" class="text-xs text-slate-500 hover:text-blue-700 font-semibold block">vCTO</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <!-- ENTERPRISE CONSULT - OUTSIDE OF ACCORDION AS PER SCREENSHOT -->
+                                <div class="mt-4 pt-4 border-t border-slate-100">
+                                    <a href="#" class="group/cta flex items-center justify-between p-4 bg-blue-50/40 hover:bg-blue-600 rounded-xl transition-all duration-300">
+                                        <span class="text-[10px] font-black text-blue-700 group-hover/cta:text-white uppercase tracking-widest">Enterprise Consult</span>
+                                        <i class="fas fa-arrow-right text-[10px] text-blue-400 group-hover/cta:text-white transition-transform group-hover/cta:translate-x-1"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- MEGA MENU END -->
+                    </div>
+
+                    <a href="#contact" class="btn-premium bg-slate-900 text-white px-8 py-3 rounded-xl font-bold text-[11px] tracking-[0.2em] shadow-lg">PARTNER WITH US</a>
+                </div>
+
+                <div class="lg:hidden flex items-center">
+                    <button id="menu-btn" class="text-slate-900 p-2 bg-slate-100 rounded-lg">
+                        <i class="fas fa-bars-staggered text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MAIN BLOG CONTENT -->
+    <div id="blog-section">
+        <!-- HERO -->
+        <section class="hero-mesh text-white pt-24 pb-32 px-4 relative">
+            <div class="max-w-7xl mx-auto text-center lg:text-left">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+                    <div class="lg:col-span-7 space-y-8">
+                        <div class="flex items-center gap-4 justify-center lg:justify-start">
+                            <span class="bg-blue-600 text-[10px] font-black px-3 py-1 rounded-full tracking-widest uppercase">Featured Article</span>
+                            <span class="text-slate-400 text-[10px] font-bold tracking-widest uppercase">12 Min Read</span>
+                        </div>
+                        <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight leading-[1.1]">
+                            The Future of <span class="gradient-text">Zero-Trust</span> in Distributed Multi-Cloud Environments.
+                        </h1>
+                        <p class="text-lg text-slate-400 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                            As enterprise perimeters vanish, how can CTOs maintain total governance across fragmented infrastructures?
+                        </p>
+                        <div class="flex flex-col sm:flex-row items-center gap-6 pt-4 justify-center lg:justify-start">
+                            <a href="#" class="btn-premium bg-white text-slate-900 px-8 py-4 rounded-xl font-bold text-[11px] tracking-[0.2em] uppercase">Read full insight</a>
+                        </div>
+                    </div>
+                    <div class="lg:col-span-5 hidden lg:block">
+                        <div class="aspect-[4/3] bg-slate-800 rounded-[32px] overflow-hidden border border-white/5 relative group shadow-2xl">
+                             <div class="absolute inset-0 bg-gradient-to-br from-blue-600/20 to-transparent"></div>
+                             <i class="fas fa-shield-halved text-[140px] text-white/5 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rotate-12"></i>
+                             <div class="absolute inset-0 flex items-center justify-center p-12 text-left">
+                                <div class="w-full h-full border border-white/10 rounded-2xl flex flex-col justify-end p-8 bg-black/20 backdrop-blur-sm">
+                                    <p class="text-blue-400 text-[10px] font-black uppercase tracking-[0.3em] mb-2">Technical Deep-Dive</p>
+                                    <h3 class="text-xl font-bold text-white leading-snug">Managing SASE at the Edge: 2026 Strategy Guide</h3>
+                                </div>
+                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- GRID -->
+        <section class="py-24 px-4 bg-white">
+            <div class="max-w-7xl mx-auto">
+                <div class="flex flex-col md:flex-row justify-between items-center mb-16 pb-8 border-b border-slate-100 gap-8">
+                    <div class="flex flex-wrap gap-4" id="category-filters">
+                        <button onclick="filterCategory('all')" id="cat-all" class="cat-btn bg-slate-900 text-white px-6 py-2 rounded-full text-[10px] font-black uppercase tracking-widest">All Insights</button>
+                        <button onclick="filterCategory('security')" id="cat-security" class="cat-btn bg-slate-50 text-slate-500 hover:bg-blue-50 hover:text-blue-700 px-6 py-2 rounded-full text-[10px] font-black uppercase tracking-widest transition-all">Security</button>
+                        <button onclick="filterCategory('networking')" id="cat-networking" class="cat-btn bg-slate-50 text-slate-500 hover:bg-blue-50 hover:text-blue-700 px-6 py-2 rounded-full text-[10px] font-black uppercase tracking-widest transition-all">Networking</button>
+                        <button onclick="filterCategory('operations')" id="cat-operations" class="cat-btn bg-slate-50 text-slate-500 hover:bg-blue-50 hover:text-blue-700 px-6 py-2 rounded-full text-[10px] font-black uppercase tracking-widest transition-all">Operations</button>
+                    </div>
+                    <div class="relative w-full md:w-64">
+                        <input type="text" id="blog-search" onkeyup="searchPosts()" placeholder="Search insights..." class="w-full bg-slate-50 border border-slate-200 rounded-xl px-5 py-3 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all">
+                        <i class="fas fa-search absolute right-5 top-1/2 -translate-y-1/2 text-slate-300 text-[10px]"></i>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
+                    <div class="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-10" id="blog-grid">
+                        <!-- Posts injected via JS -->
+                    </div>
+                    <aside class="lg:col-span-4 space-y-12">
+                        <div class="bg-slate-900 rounded-[32px] p-10 text-white relative overflow-hidden">
+                            <h4 class="text-2xl font-bold mb-4">Enterprise Monthly</h4>
+                            <p class="text-slate-400 text-xs mb-6 font-medium">Get technical whitepapers and industry briefings delivered to your inbox.</p>
+                            <form class="space-y-4">
+                                <input type="email" placeholder="Work Email" class="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-3 text-xs focus:outline-none focus:border-blue-500 transition-colors">
+                                <button type="button" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-xl font-black text-[10px] uppercase tracking-[0.2em] transition-all">Subscribe</button>
+                            </form>
+                            <i class="fas fa-envelope-open-text text-[120px] text-white/5 absolute -right-8 -bottom-8"></i>
+                        </div>
+                    </aside>
+                </div>
+
+                <div class="mt-24 flex justify-center items-center gap-2" id="pagination">
+                    <!-- Pagination injected via JS -->
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-[#0b0f19] pt-32 pb-16 px-4 text-slate-400 border-t border-white/5">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-y-16 lg:gap-x-12 text-left">
+                <div class="lg:col-span-4 space-y-10">
+                    <div class="flex items-center gap-3">
+                        <div class="bg-white p-1 rounded-xl shadow-xl shadow-blue-600/10 border border-slate-800">
+                            <img src="https://techgrid-systems.github.io/techgrid-systems-logo/tgs.jpg" alt="Logo" class="brand-logo-img h-10 w-10 object-contain rounded-lg">
+                        </div>
+                        <span class="text-2xl font-black text-white tracking-tight">Techgrid<span class="text-blue-600">Systems</span></span>
+                    </div>
+                </div>
+                <div class="lg:col-span-2 space-y-8">
+                    <h5 class="text-white font-black text-[10px] uppercase tracking-[0.4em]">Company</h5>
+                    <ul class="space-y-4 text-sm">
+                        <li><a href="#" class="footer-link">About us</a></li>
+                        <li><a href="#" class="footer-link">Careers</a></li>
+                    </ul>
+                </div>
+                <div class="lg:col-span-2 space-y-8">
+                    <h5 class="text-white font-black text-[10px] uppercase tracking-[0.4em]">Legal</h5>
+                    <ul class="space-y-4 text-sm">
+                        <li><a href="#" class="footer-link">Privacy Policy</a></li>
+                        <li><a href="#" class="footer-link">Terms</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-28 pt-12 border-t border-white/5 text-[9px] font-bold tracking-[0.4em] text-slate-700 uppercase">
+                &copy; 2026 Techgrid Systems.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const posts = [
+            { id: 1, category: 'networking', date: 'June 14, 2026', title: 'Optimizing Data Center Power Consumption with AI Analytics.', excerpt: 'Reducing operational costs through granular observability in high-density cooling environments.', icon: 'fa-server' },
+            { id: 2, category: 'security', date: 'June 08, 2026', title: 'Navigating Global Privacy Shifts: A Guide for Multinational IT.', excerpt: 'The regulatory landscape is changing faster than ever. Stay ahead of residency protocols.', icon: 'fa-file-shield' },
+            { id: 3, category: 'operations', date: 'May 29, 2026', title: 'Managed IT: Moving from Reactive to Predictive Maintenance.', excerpt: 'How telemetry and machine learning are redefining the traditional helpdesk experience.', icon: 'fa-robot' },
+            { id: 4, category: 'networking', date: 'May 22, 2026', title: 'The Impact of Wi-Fi 7 on Corporate Campus Connectivity.', excerpt: 'Understanding low-latency spectrum allocation for the modern agile workspace.', icon: 'fa-wifi' },
+            { id: 5, category: 'security', date: 'May 15, 2026', title: 'Securing Hybrid Workforce Endpoints in 2026.', excerpt: 'Legacy VPNs are failing. Why secure service edge (SSE) is the new standard.', icon: 'fa-lock' },
+            { id: 6, category: 'operations', date: 'May 04, 2026', title: 'Cloud Cost Governance: Beyond the Basic Dashboard.', excerpt: 'Deep-dive into multi-cloud FinOps strategies for enterprise-scale deployments.', icon: 'fa-chart-line' }
+        ];
+
+        let currentCategory = 'all';
+        let currentPage = 1;
+        const postsPerPage = 4;
+        let searchQuery = "";
+
+        function toggleAccordion(id, iconId) {
+            const content = document.getElementById(id);
+            const icon = document.getElementById(iconId);
+            if (!content) return;
+            const isClosing = content.classList.contains('active');
+            const parent = content.closest('.p-5');
+            const allContents = parent.querySelectorAll('.accordion-content');
+            const allIcons = parent.querySelectorAll('.rotate-icon');
+            allContents.forEach(c => { if(c.id !== id) c.classList.remove('active'); });
+            allIcons.forEach(i => { if(i.id !== iconId) i.classList.remove('active'); });
+            if (!isClosing) {
+                content.classList.add('active');
+                if (icon) icon.classList.add('active');
+            } else {
+                content.classList.remove('active');
+                if (icon) icon.classList.remove('active');
+            }
+        }
+
+        function filterCategory(cat) {
+            currentCategory = cat;
+            currentPage = 1;
+            updateCategoryUI();
+            renderBlog();
+        }
+
+        function changePage(page) {
+            currentPage = page;
+            renderBlog();
+        }
+
+        function searchPosts() {
+            searchQuery = document.getElementById('blog-search').value.toLowerCase();
+            currentPage = 1;
+            renderBlog();
+        }
+
+        function updateCategoryUI() {
+            const buttons = document.querySelectorAll('.cat-btn');
+            buttons.forEach(btn => btn.classList.replace('bg-slate-900', 'bg-slate-50'));
+            buttons.forEach(btn => btn.classList.replace('text-white', 'text-slate-500'));
+            const activeBtn = document.getElementById(`cat-${currentCategory}`);
+            if (activeBtn) {
+                activeBtn.classList.replace('bg-slate-50', 'bg-slate-900');
+                activeBtn.classList.replace('text-slate-500', 'text-white');
+            }
+        }
+
+        function renderBlog() {
+            const grid = document.getElementById('blog-grid');
+            const pagContainer = document.getElementById('pagination');
+            let filtered = posts.filter(p => {
+                const matchesCat = currentCategory === 'all' || p.category === currentCategory;
+                const matchesSearch = p.title.toLowerCase().includes(searchQuery);
+                return matchesCat && matchesSearch;
+            });
+            const totalPages = Math.ceil(filtered.length / postsPerPage);
+            const startIdx = (currentPage - 1) * postsPerPage;
+            const paginatedPosts = filtered.slice(startIdx, startIdx + postsPerPage);
+
+            grid.innerHTML = paginatedPosts.map(post => `
+                <div class="blog-card flex flex-col group cursor-pointer text-left">
+                    <div class="aspect-video bg-slate-50 rounded-[24px] mb-6 overflow-hidden border border-slate-100 relative">
+                         <div class="absolute top-4 right-4 bg-white/90 backdrop-blur shadow-sm rounded-lg px-3 py-1 text-[9px] font-black text-slate-900 uppercase tracking-widest">${post.category}</div>
+                         <i class="fas ${post.icon} text-blue-100 text-6xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 group-hover:scale-110 transition-transform"></i>
+                    </div>
+                    <div class="space-y-4">
+                        <span class="text-blue-700 text-[10px] font-black uppercase tracking-[0.2em]">${post.date}</span>
+                        <h3 class="text-2xl font-bold text-slate-900 group-hover:text-blue-700 transition-colors leading-tight">${post.title}</h3>
+                        <p class="text-slate-500 text-sm leading-relaxed">${post.excerpt}</p>
+                    </div>
+                </div>
+            `).join('');
+
+            let pagHTML = "";
+            for (let i = 1; i <= totalPages; i++) {
+                pagHTML += `<button onclick="changePage(${i})" class="w-10 h-10 rounded-xl text-[10px] font-black transition-all ${i === currentPage ? 'bg-slate-900 text-white shadow-xl' : 'bg-white border border-slate-200 text-slate-900'}">${i}</button>`;
+            }
+            pagContainer.innerHTML = pagHTML;
+        }
+
+        window.onload = renderBlog;
+    </script>
+</body>
+</html>
