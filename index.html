@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Login Page</title>
+    <style>
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
+            display: flex; 
+            justify-content: center; 
+            padding-top: 100px; 
+            background-color: #f4f4f9; 
+        }
+        .login-container { 
+            background: white; 
+            padding: 2rem; 
+            border-radius: 8px; 
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1); 
+        }
+        input { 
+            display: block; 
+            margin: 10px 0; 
+            padding: 10px; 
+            width: 250px; 
+            border: 1px solid #ccc; 
+            border-radius: 4px;
+        }
+        button { 
+            padding: 10px 20px; 
+            cursor: pointer; 
+            background-color: #007bff; 
+            color: white; 
+            border: none; 
+            border-radius: 4px;
+        }
+        button:hover { background-color: #0056b3; }
+        #message { color: red; margin-top: 10px; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+
+<div class="login-container" id="loginBox">
+    <h2>Login</h2>
+    <input type="text" id="username" placeholder="Username">
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="checkCredentials()">Login</button>
+    <p id="message"></p>
+</div>
+
+<div id="protectedContent" style="display:none; text-align: center;">
+    <h1>Access Granted</h1>
+    <p>You have successfully entered the secure area.</p>
+</div>
+
+<script>
+    async function checkCredentials() {
+        const user = document.getElementById("username").value;
+        const pass = document.getElementById("password").value;
+        const message = document.getElementById("message");
+
+        // The SHA-256 hash you provided
+        const targetHash = "239f68ac7de461d96b0c0dc1962a0bbe28371b1b3e50c94d595f2b731d187374";
+
+        // Convert input password to hash using Web Crypto API
+        const encoder = new TextEncoder();
+        const data = encoder.encode(pass);
+        const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+        
+        // Convert buffer to hex string
+        const hashArray = Array.from(new Uint8Array(hashBuffer));
+        const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+
+        // Compare
+        if (user === "admin" && hashHex === targetHash) {
+            document.getElementById("loginBox").style.display = "none";
+            document.getElementById("protectedContent").style.display = "block";
+        } else {
+            message.innerText = "Invalid username or password!";
+        }
+    }
+</script>
+
+</body>
+</html>
