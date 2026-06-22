@@ -59,10 +59,10 @@
         const pass = document.getElementById("password").value;
         const message = document.getElementById("message");
 
-        // The SHA-256 hash you provided
+        // The SHA-256 hash
         const targetHash = "239f68ac7de461d96b0c0dc1962a0bbe28371b1b3e50c94d595f2b731d187374";
 
-        // Convert input password to hash using Web Crypto API
+        // Convert input password to hash
         const encoder = new TextEncoder();
         const data = encoder.encode(pass);
         const hashBuffer = await crypto.subtle.digest('SHA-256', data);
@@ -71,10 +71,10 @@
         const hashArray = Array.from(new Uint8Array(hashBuffer));
         const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
 
-        // Compare
+        // Compare and redirect
         if (user === "admin" && hashHex === targetHash) {
-            document.getElementById("loginBox").style.display = "none";
-            document.getElementById("protectedContent").style.display = "block";
+            // This line tells the browser to navigate to your new page
+            window.location.href = "main.html";
         } else {
             message.innerText = "Invalid username or password!";
         }
