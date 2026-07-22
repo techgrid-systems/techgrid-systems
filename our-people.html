@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Our People - Meet the Team</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-dark: #052c33;
+            --accent-teal: #00bcd4;
+            --border-color: #ccc;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+            color: #333;
+        }
+
+        .team-container {
+            max-width: 900px;
+            margin: 60px auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            font-size: 42px;
+            color: var(--primary-dark);
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+
+        .description {
+            font-size: 15px;
+            line-height: 1.6;
+            color: #555;
+            max-width: 800px;
+            margin: 0 auto 40px auto;
+        }
+
+        .search-wrapper {
+            position: relative;
+            max-width: 650px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .search-box-container {
+            background: #fff;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .search-input-field {
+            width: 100%;
+            padding: 18px 20px;
+            font-size: 16px;
+            border: none;
+            outline: none;
+            box-sizing: border-box;
+            background: transparent;
+        }
+
+        .suggestions-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: #fff;
+            border: 1px solid var(--border-color);
+            border-top: none;
+            z-index: 10;
+            max-height: 200px;
+            overflow-y: auto;
+            display: none;
+        }
+
+        .suggestion-item {
+            padding: 12px 20px;
+            cursor: pointer;
+            font-size: 15px;
+            color: #333;
+            background-color: #e0e0e0;
+            border-bottom: 1px solid #dcdcdc;
+        }
+
+        .suggestion-item:hover {
+            background-color: #d0d0d0;
+        }
+
+        .search-btn {
+            width: 100%;
+            background-color: var(--primary-dark);
+            color: white;
+            border: none;
+            padding: 16px;
+            font-size: 15px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
+        .search-btn:hover {
+            background-color: #083d47;
+        }
+
+        .results-section {
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+
+        .profile-card {
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            width: 300px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            display: none;
+            text-align: left;
+        }
+
+        .profile-image {
+            width: 100%;
+            height: 320px;
+            object-fit: cover;
+        }
+
+        .profile-content {
+            padding: 20px;
+        }
+
+        .profile-role {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 8px;
+        }
+
+        .profile-name {
+            font-size: 20px;
+            font-weight: bold;
+            color: var(--primary-dark);
+            margin-bottom: 15px;
+        }
+
+        .profile-contact {
+            font-size: 14px;
+            color: #007788;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .profile-contact i {
+            color: var(--accent-teal);
+            font-size: 16px;
+        }
+
+        .view-profile-link {
+            display: inline-block;
+            margin-top: 15px;
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            color: #333;
+            text-decoration: none;
+            text-transform: uppercase;
+            border-bottom: 1px solid #333;
+            padding-bottom: 2px;
+        }
+
+        .view-profile-link:hover {
+            color: var(--accent-teal);
+            border-color: var(--accent-teal);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="team-container">
+        <div class="subtitle">Meet the team</div>
+        <h1>Search our people</h1>
+        <p class="description">
+            Our people are proactive in thinking of opportunities and delivering a quality service. We are also focussed – building best-in-class teams for each client...
+        </p>
+
+        <div class="search-wrapper">
+            <div class="search-box-container">
+                <input type="text" id="searchInput" class="search-input-field" placeholder="Type name..." autocomplete="off">
+                <div id="suggestionsDropdown" class="suggestions-dropdown"></div>
+            </div>
+            <button id="searchBtn" class="search-btn">Search</button>
+        </div>
+    </div>
+
+    <div class="results-section">
+        <div id="profileCard" class="profile-card">
+            <img id="profileImg" src="" alt="" class="profile-image">
+            <div class="profile-content">
+                <div id="profileRole" class="profile-role"></div>
+                <div id="profileName" class="profile-name"></div>
+                <a id="profilePhoneLink" href="#" class="profile-contact">
+                    <i class="fa-solid fa-phone"></i> <span id="profilePhone"></span>
+                </a>
+                <a id="profileEmailLink" href="#" class="profile-contact">
+                    <i class="fa-solid fa-envelope"></i> <span id="profileEmail"></span>
+                </a>
+                <a id="profileUrl" href="#" class="view-profile-link">View Profile</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let teamMembers = [];
+
+        // Fetch database dynamically from directory.json
+        fetch('directory.json')
+            .then(response => response.json())
+            .then(data => {
+                teamMembers = data;
+            })
+            .catch(error => console.error('Error loading team database:', error));
+
+        const searchInput = document.getElementById('searchInput');
+        const suggestionsDropdown = document.getElementById('suggestionsDropdown');
+        const searchBtn = document.getElementById('searchBtn');
+        const profileCard = document.getElementById('profileCard');
+
+        const profileImg = document.getElementById('profileImg');
+        const profileRole = document.getElementById('profileRole');
+        const profileName = document.getElementById('profileName');
+        const profilePhone = document.getElementById('profilePhone');
+        const profilePhoneLink = document.getElementById('profilePhoneLink');
+        const profileEmail = document.getElementById('profileEmail');
+        const profileEmailLink = document.getElementById('profileEmailLink');
+        const profileUrl = document.getElementById('profileUrl');
+
+        let selectedMember = null;
+
+        searchInput.addEventListener('input', function() {
+            const query = this.value.toLowerCase().trim();
+            suggestionsDropdown.innerHTML = '';
+            
+            if (query === '' || teamMembers.length === 0) {
+                suggestionsDropdown.style.display = 'none';
+                return;
+            }
+
+            const matches = teamMembers.filter(member => 
+                member.fullName.toLowerCase().includes(query)
+            );
+
+            if (matches.length > 0) {
+                suggestionsDropdown.style.display = 'block';
+                matches.forEach(member => {
+                    const div = document.createElement('div');
+                    div.classList.add('suggestion-item');
+                    div.innerHTML = `<strong>${member.firstName}</strong> ${member.lastName}`;
+                    
+                    div.addEventListener('click', function() {
+                        searchInput.value = member.fullName;
+                        selectedMember = member;
+                        suggestionsDropdown.style.display = 'none';
+                    });
+                    suggestionsDropdown.appendChild(div);
+                });
+            } else {
+                suggestionsDropdown.style.display = 'none';
+            }
+        });
+
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.search-wrapper')) {
+                suggestionsDropdown.style.display = 'none';
+            }
+        });
+
+        function showProfile(member) {
+            if (!member) return;
+            
+            profileImg.src = member.image;
+            profileImg.alt = member.fullName;
+            profileRole.textContent = member.role;
+            profileName.textContent = member.fullName;
+            profilePhone.textContent = member.phone;
+            profilePhoneLink.href = `tel:${member.phone.replace(/\s+/g, '')}`;
+            profileEmail.textContent = member.email;
+            profileEmailLink.href = `mailto:${member.email}`;
+            profileUrl.href = member.profilePage; // Directly links to their individual HTML page
+
+            profileCard.style.display = 'block';
+        }
+
+        searchBtn.addEventListener('click', function() {
+            const query = searchInput.value.toLowerCase().trim();
+            const found = teamMembers.find(m => m.fullName.toLowerCase() === query);
+            
+            if (found) {
+                selectedMember = found;
+                showPropertyCard(selectedMember); // safe call
+                showProfile(selectedMember);
+            } else {
+                alert('Please select a valid user from the search dropdown list.');
+            }
+        });
+    </script>
+</body>
+</html>
