@@ -228,7 +228,7 @@
         let teamMembers = [];
 
         // Fetch database dynamically from directory.json
-        fetch('directory.json')
+        fetch('./directory.json')
             .then(response => response.json())
             .then(data => {
                 teamMembers = data;
