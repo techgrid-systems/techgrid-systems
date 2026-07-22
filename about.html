@@ -119,7 +119,7 @@
 </head>
 <body class="bg-[#fcfdfe] text-slate-900">
 
-    <!-- Navigation (UNCHANGED) -->
+  <!-- Navigation -->
     <nav class="glass border-b border-slate-200/50 sticky top-0 z-[100]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-20">
@@ -134,10 +134,11 @@
 
                 <!-- Desktop Menu -->
                 <div class="hidden lg:flex items-center space-x-8">
-                    <a href="https://www.techgrid-systems.org.uk" class="text-slate-500 hover:text-blue-700 font-bold text-[11px] tracking-[0.15em] transition-colors uppercase">Home</a>
+                    <a href="#home" class="text-slate-500 hover:text-blue-700 font-bold text-[11px] tracking-[0.15em] transition-colors uppercase">Home</a>
                     
+                    <!-- ABOUT DROPDOWN -->
                     <div class="relative dropdown group h-full flex items-center">
-                        <button class="text-blue-700 font-bold text-[11px] tracking-[0.15em] flex items-center gap-2 outline-none uppercase">
+                        <button class="text-slate-500 group-hover:text-blue-700 font-bold text-[11px] tracking-[0.15em] flex items-center gap-2 outline-none uppercase">
                             About <i class="fas fa-chevron-down text-[9px] opacity-40 group-hover:rotate-180 transition-transform"></i>
                         </button>
                         <div class="mega-menu absolute top-[80px] -left-10 bg-white border border-slate-200 shadow-2xl rounded-2xl w-56 overflow-hidden">
@@ -154,8 +155,9 @@
 
                     <a href="our-people" class="text-slate-500 hover:text-blue-700 font-bold text-[11px] tracking-[0.15em] transition-colors uppercase">Meet the Team</a>
                     
+                    <!-- INSIGHTS DROPDOWN -->
                     <div class="relative dropdown group h-full flex items-center">
-                        <button class="text-slate-500 hover:text-blue-700 font-bold text-[11px] tracking-[0.15em] flex items-center gap-2 outline-none uppercase">
+                        <button class="text-slate-500 group-hover:text-blue-700 font-bold text-[11px] tracking-[0.15em] flex items-center gap-2 outline-none uppercase">
                             Insights <i class="fas fa-chevron-down text-[9px] opacity-40 group-hover:rotate-180 transition-transform"></i>
                         </button>
                         <div class="mega-menu absolute top-[80px] -left-10 bg-white border border-slate-200 shadow-2xl rounded-2xl w-56 overflow-hidden">
@@ -176,8 +178,9 @@
                         </div>
                     </div>
 
+                    <!-- SOLUTIONS MEGA MENU -->
                     <div class="relative dropdown group h-full flex items-center">
-                        <button class="text-slate-500 hover:text-blue-700 font-bold text-[11px] tracking-[0.15em] flex items-center gap-2 outline-none uppercase">
+                        <button class="text-slate-500 group-hover:text-blue-700 font-bold text-[11px] tracking-[0.15em] flex items-center gap-2 outline-none uppercase">
                             Solutions <i class="fas fa-chevron-down text-[9px] opacity-40 group-hover:rotate-180 transition-transform"></i>
                         </button>
                         
@@ -241,16 +244,17 @@
                                 </div>
                             </div>
                             <div class="bg-slate-50 p-5 border-t border-slate-100">
-                                <a href="contact" class="text-[10px] font-black text-blue-700 uppercase tracking-widest flex items-center justify-between">
+                                <a href="contact" target="_blank"  class="text-[10px] font-black text-blue-700 uppercase tracking-widest flex items-center justify-between">
                                     Enterprise Consult <i class="fas fa-arrow-right"></i>
                                 </a>
                             </div>
                         </div>
                     </div>
 
-                    <a href="contact" class="btn-premium bg-slate-900 text-white px-8 py-3 rounded-xl font-bold text-[11px] tracking-[0.2em] shadow-lg">PARTNER WITH US</a>
+                    <a href="contact" target="_blank" class="btn-premium bg-slate-900 text-white px-8 py-3 rounded-xl font-bold text-[11px] tracking-[0.2em] shadow-lg">PARTNER WITH US</a>
                 </div>
 
+                <!-- Mobile Menu Button -->
                 <div class="lg:hidden flex items-center">
                     <button id="menu-btn" class="text-slate-900 p-2 bg-slate-100 rounded-lg">
                         <i class="fas fa-bars-staggered text-xl"></i>
@@ -259,19 +263,21 @@
             </div>
         </div>
 
-        <!-- Mobile Menu (UNCHANGED) -->
+        <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-slate-100 p-4 space-y-2 pb-8 overflow-y-auto max-h-screen">
             <a href="https://www.techgrid-systems.org.uk" class="block p-4 text-[11px] font-black text-slate-500 uppercase tracking-[0.15em] hover:bg-slate-50 rounded-xl">Home</a>
             
-            <button onclick="toggleAccordion('mob-about-panel', 'about-icon-main')" class="w-full flex items-center justify-between p-4 text-[11px] font-black text-blue-700 uppercase tracking-[0.15em] hover:bg-slate-50 rounded-xl font-black">
+            <!-- Mobile About -->
+            <button onclick="toggleAccordion('mob-about-panel', 'about-icon-main')" class="w-full flex items-center justify-between p-4 text-[11px] font-black text-slate-500 uppercase tracking-[0.15em] hover:bg-slate-50 rounded-xl">
                 About <i id="about-icon-main" class="fas fa-chevron-down rotate-icon text-[10px] transition-transform"></i>
             </button>
             <div id="mob-about-panel" class="accordion-content px-4 space-y-2">
                 <a href="about" class="block py-2 text-xs font-semibold text-slate-600">About Us</a>
             </div>
 
-            <a href="#" class="block p-4 text-[11px] font-black text-slate-500 uppercase tracking-[0.15em] hover:bg-slate-50 rounded-xl">Enterprise</a>
+            <a href="our-people" class="text-slate-500 hover:text-blue-700 font-bold text-[11px] tracking-[0.15em] transition-colors uppercase">Meet the Team</a>
 
+            <!-- Mobile Insights -->
             <button onclick="toggleAccordion('mob-insights-panel', 'insights-icon-main')" class="w-full flex items-center justify-between p-4 text-[11px] font-black text-slate-500 uppercase tracking-[0.15em] hover:bg-slate-50 rounded-xl">
                 Insights <i id="insights-icon-main" class="fas fa-chevron-down rotate-icon text-[10px] transition-transform"></i>
             </button>
@@ -280,12 +286,14 @@
                 <a href="#" class="block py-2 text-xs font-semibold text-slate-600">Case Studies</a>
             </div>
             
+            <!-- Mobile Solutions -->
             <button onclick="toggleAccordion('mobile-solutions-panel', 'sol-icon-main')" class="w-full flex items-center justify-between p-4 text-[11px] font-black text-slate-500 uppercase tracking-[0.15em] hover:bg-slate-50 rounded-xl">
                 Solutions <i id="sol-icon-main" class="fas fa-chevron-down rotate-icon text-[10px] transition-transform"></i>
             </button>
             <div id="mobile-solutions-panel" class="accordion-content px-2 space-y-2">
                 <div class="bg-white border border-slate-200 shadow-sm rounded-2xl overflow-hidden mt-2">
                     <div class="p-3 space-y-1">
+                        <!-- Connectivity -->
                         <div class="border-b border-slate-50 last:border-0 pb-1">
                             <button onclick="toggleAccordion('mob-net-inner', 'mob-net-icon')" class="w-full flex items-center justify-between p-3 hover:bg-slate-50 rounded-xl transition-colors">
                                 <div class="flex items-center gap-3">
@@ -304,6 +312,7 @@
                                 </ul>
                             </div>
                         </div>
+                        <!-- Infrastructure -->
                         <div class="border-b border-slate-50 last:border-0 pb-1">
                             <button onclick="toggleAccordion('mob-infra-inner', 'mob-infra-icon')" class="w-full flex items-center justify-between p-3 hover:bg-slate-50 rounded-xl transition-colors">
                                 <div class="flex items-center gap-3">
@@ -322,6 +331,7 @@
                                 </ul>
                             </div>
                         </div>
+                        <!-- Managed Ops (Integrated from Desktop) -->
                         <div class="border-b border-slate-50 last:border-0 pb-1">
                             <button onclick="toggleAccordion('mob-support-inner', 'mob-support-icon')" class="w-full flex items-center justify-between p-3 hover:bg-slate-50 rounded-xl transition-colors">
                                 <div class="flex items-center gap-3">
@@ -341,11 +351,16 @@
                             </div>
                         </div>
                     </div>
+                    <div class="bg-slate-50 p-4 border-t border-slate-100">
+                        <a href="contact" target="_blank" class="text-[10px] font-black text-blue-700 uppercase tracking-widest flex items-center justify-between">
+                            Enterprise Consult <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
             
             <div class="pt-6">
-                <a href="contact" class="block w-full bg-slate-900 text-white text-center py-4 rounded-xl font-bold text-[11px] tracking-[0.2em] uppercase">Partner With Us</a>
+                <a href="contact" target="_blank" class="block w-full bg-slate-900 text-white text-center py-4 rounded-xl font-bold text-[11px] tracking-[0.2em] uppercase">Partner With Us</a>
             </div>
         </div>
     </nav>
