@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search Our People - Meet the Team</title>
+    <!-- FontAwesome for phone and email icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -195,7 +196,7 @@
         <div class="subtitle">Meet the team</div>
         <h1>Search our people</h1>
         <p class="description">
-            Our people are proactive in thinking of opportunities and delivering a quality service. We are also focussed – building best-in-class teams for each client...
+            Our people are proactive in thinking of opportunities and delivering a quality service. We are also focussed – building best-in-class teams for each client and because we are connected and only offer services that are authentic to our expertise, we know easily who the best specialist is to bring into a team. We handpick our talent to create real depth in the key business areas that we excel, which means we really are market leaders in what we do.
         </p>
 
         <div class="search-wrapper">
@@ -227,8 +228,8 @@
     <script>
         let teamMembers = [];
 
-        // Fetch database dynamically from directory.json
-        fetch('./directory.json')
+        // Fetches data from your directory.json file acting as the hidden database
+        fetch('directory.json')
             .then(response => response.json())
             .then(data => {
                 teamMembers = data;
@@ -300,7 +301,7 @@
             profilePhoneLink.href = `tel:${member.phone.replace(/\s+/g, '')}`;
             profileEmail.textContent = member.email;
             profileEmailLink.href = `mailto:${member.email}`;
-            profileUrl.href = member.profilePage; // Directly links to their individual HTML page
+            profileUrl.href = member.profilePage;
 
             profileCard.style.display = 'block';
         }
@@ -311,7 +312,6 @@
             
             if (found) {
                 selectedMember = found;
-                showPropertyCard(selectedMember); // safe call
                 showProfile(selectedMember);
             } else {
                 alert('Please select a valid user from the search dropdown list.');
