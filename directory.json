@@ -1,0 +1,24 @@
+[
+  {
+    "id": "kate-scholes",
+    "firstName": "Kate",
+    "lastName": "Scholes",
+    "fullName": "Kate Scholes",
+    "role": "Head of Business Operations",
+    "phone": "0161 8176 240",
+    "email": "kate.scholes@rapleys.com",
+    "image": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80",
+    "profilePage": "profiles/kate-scholes.html"
+  },
+  {
+    "id": "john-doe",
+    "firstName": "John",
+    "lastName": "Doe",
+    "fullName": "John Doe",
+    "role": "Senior Surveyor",
+    "phone": "0161 8176 241",
+    "email": "john.doe@rapleys.com",
+    "image": "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=600&q=80",
+    "profilePage": "profiles/john-doe.html"
+  }
+]
