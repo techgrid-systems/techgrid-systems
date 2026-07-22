@@ -122,12 +122,12 @@
 </head>
 <body class="bg-[#fcfdfe] text-slate-900">
 
-    <!-- Navigation -->
+  <!-- Navigation -->
     <nav class="glass border-b border-slate-200/50 sticky top-0 z-[100]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-20">
                 <div class="flex items-center">
-                    <a href="index.html" class="flex items-center gap-3 group">
+                    <a href="https://www.techgrid-systems.org.uk" class="flex items-center gap-3 group">
                         <div class="bg-white p-1 rounded-xl shadow-lg shadow-blue-700/10 group-hover:shadow-blue-700/20 transition-all border border-slate-100">
                             <img src="https://techgrid-systems.github.io/techgrid-systems-logo/tgs.jpg" alt="Techgrid Systems Logo" class="brand-logo-img h-10 w-10 object-contain rounded-lg">
                         </div>
@@ -137,25 +137,20 @@
 
                 <!-- Desktop Menu -->
                 <div class="hidden lg:flex items-center space-x-8">
-                    <a href="#" class="text-slate-500 hover:text-blue-700 font-bold text-[11px] tracking-[0.15em] transition-colors uppercase">Home</a>
+                    <a href="#home" class="text-slate-500 hover:text-blue-700 font-bold text-[11px] tracking-[0.15em] transition-colors uppercase">Home</a>
                     
+                    <!-- ABOUT DROPDOWN -->
                     <div class="relative dropdown group h-full flex items-center">
-                        <button class="text-slate-500 hover:text-blue-700 font-bold text-[11px] tracking-[0.15em] flex items-center gap-2 outline-none uppercase">
+                        <button class="text-slate-500 group-hover:text-blue-700 font-bold text-[11px] tracking-[0.15em] flex items-center gap-2 outline-none uppercase">
                             About <i class="fas fa-chevron-down text-[9px] opacity-40 group-hover:rotate-180 transition-transform"></i>
                         </button>
                         <div class="mega-menu absolute top-[80px] -left-10 bg-white border border-slate-200 shadow-2xl rounded-2xl w-56 overflow-hidden">
                             <div class="p-4 space-y-1">
-                                <a href="#" class="flex items-center gap-3 p-3 hover:bg-slate-50 rounded-xl transition-colors">
+                                <a href="about" class="flex items-center gap-3 p-3 hover:bg-slate-50 rounded-xl transition-colors">
                                     <div class="w-6 h-6 bg-blue-50 text-blue-700 rounded flex items-center justify-center">
                                         <i class="fas fa-info-circle text-[10px]"></i>
                                     </div>
                                     <span class="text-[10px] font-black text-slate-800 tracking-widest uppercase">About Us</span>
-                                </a>
-                                <a href="#" class="flex items-center gap-3 p-3 hover:bg-slate-50 rounded-xl transition-colors">
-                                    <div class="w-6 h-6 bg-blue-50 text-blue-700 rounded flex items-center justify-center">
-                                        <i class="fas fa-briefcase text-[10px]"></i>
-                                    </div>
-                                    <span class="text-[10px] font-black text-slate-800 tracking-widest uppercase">Careers</span>
                                 </a>
                             </div>
                         </div>
@@ -163,8 +158,9 @@
 
                     <a href="our-people" class="text-slate-500 hover:text-blue-700 font-bold text-[11px] tracking-[0.15em] transition-colors uppercase">Meet the Team</a>
                     
+                    <!-- INSIGHTS DROPDOWN -->
                     <div class="relative dropdown group h-full flex items-center">
-                        <button class="text-blue-700 font-bold text-[11px] tracking-[0.15em] flex items-center gap-2 outline-none uppercase">
+                        <button class="text-slate-500 group-hover:text-blue-700 font-bold text-[11px] tracking-[0.15em] flex items-center gap-2 outline-none uppercase">
                             Insights <i class="fas fa-chevron-down text-[9px] opacity-40 group-hover:rotate-180 transition-transform"></i>
                         </button>
                         <div class="mega-menu absolute top-[80px] -left-10 bg-white border border-slate-200 shadow-2xl rounded-2xl w-56 overflow-hidden">
@@ -185,17 +181,16 @@
                         </div>
                     </div>
 
+                    <!-- SOLUTIONS MEGA MENU -->
                     <div class="relative dropdown group h-full flex items-center">
-                        <button class="text-slate-500 hover:text-blue-700 font-bold text-[11px] tracking-[0.15em] flex items-center gap-2 outline-none uppercase">
+                        <button class="text-slate-500 group-hover:text-blue-700 font-bold text-[11px] tracking-[0.15em] flex items-center gap-2 outline-none uppercase">
                             Solutions <i class="fas fa-chevron-down text-[9px] opacity-40 group-hover:rotate-180 transition-transform"></i>
                         </button>
                         
-                        <!-- MEGA MENU START -->
-                        <div class="mega-menu absolute top-[80px] -left-10 bg-white border border-slate-200 shadow-2xl rounded-2xl w-80 overflow-hidden">
+                        <div class="mega-menu absolute top-[80px] -left-10 bg-white border border-slate-200 shadow-2xl rounded-2xl w-80 overflow-y-auto max-h-[80vh]">
                             <div class="p-5 space-y-2">
-                                <!-- Connectivity Section -->
-                                <div class="border-b border-slate-50 pb-2">
-                                    <button onclick="toggleAccordion('dt-net', 'dt-net-icon')" class="w-full flex items-center justify-between p-3 hover:bg-slate-50 rounded-xl transition-colors text-left">
+                                <div class="border-b border-slate-50 last:border-0 pb-2">
+                                    <button onclick="toggleAccordion('dt-net', 'dt-net-icon')" class="w-full flex items-center justify-between p-3 hover:bg-slate-50 rounded-xl transition-colors">
                                         <div class="flex items-center gap-3">
                                             <div class="w-6 h-6 bg-blue-50 text-blue-700 rounded flex items-center justify-center">
                                                 <i class="fas fa-project-diagram text-[10px]"></i>
@@ -213,9 +208,8 @@
                                     </div>
                                 </div>
 
-                                <!-- Infrastructure Section -->
-                                <div class="border-b border-slate-50 pb-2">
-                                    <button onclick="toggleAccordion('dt-infra', 'dt-infra-icon')" class="w-full flex items-center justify-between p-3 hover:bg-slate-50 rounded-xl transition-colors text-left">
+                                <div class="border-b border-slate-50 last:border-0 pb-2">
+                                    <button onclick="toggleAccordion('dt-infra', 'dt-infra-icon')" class="w-full flex items-center justify-between p-3 hover:bg-slate-50 rounded-xl transition-colors">
                                         <div class="flex items-center gap-3">
                                             <div class="w-6 h-6 bg-slate-100 text-slate-700 rounded flex items-center justify-center">
                                                 <i class="fas fa-server text-[10px]"></i>
@@ -233,9 +227,8 @@
                                     </div>
                                 </div>
 
-                                <!-- Managed Ops Section -->
-                                <div class="pb-1">
-                                    <button onclick="toggleAccordion('dt-support', 'dt-support-icon')" class="w-full flex items-center justify-between p-3 hover:bg-slate-50 rounded-xl transition-colors text-left">
+                                <div class="border-b border-slate-50 last:border-0 pb-2">
+                                    <button onclick="toggleAccordion('dt-support', 'dt-support-icon')" class="w-full flex items-center justify-between p-3 hover:bg-slate-50 rounded-xl transition-colors">
                                         <div class="flex items-center gap-3">
                                             <div class="w-6 h-6 bg-blue-900 text-white rounded flex items-center justify-center">
                                                 <i class="fas fa-shield-alt text-[10px]"></i>
@@ -246,34 +239,131 @@
                                     </button>
                                     <div id="dt-support" class="accordion-content pl-12 pr-4">
                                         <ul class="space-y-2 mt-2">
-                                            <li><a href="#" class="text-xs text-slate-500 hover:text-blue-700 font-semibold block">Professional Services</a></li>
-                                            <li><a href="#" class="text-xs text-slate-500 hover:text-blue-700 font-semibold block">Managed IT</a></li>
-                                            <li><a href="#" class="text-xs text-slate-500 hover:text-blue-700 font-semibold block">Cyber Security</a></li>
-                                            <li><a href="#" class="text-xs text-slate-500 hover:text-blue-700 font-semibold block">vCTO</a></li>
+                                            <li><a href="#" class="text-xs text-slate-500 hover:text-blue-700 font-semibold block">24/7 Global NOC</a></li>
+                                            <li><a href="#" class="text-xs text-slate-500 hover:text-blue-700 font-semibold block">Cyber Governance</a></li>
+                                            <li><a href="#" class="text-xs text-slate-500 hover:text-blue-700 font-semibold block">vCTO Strategy</a></li>
                                         </ul>
                                     </div>
                                 </div>
-
-                                <!-- ENTERPRISE CONSULT - OUTSIDE OF ACCORDION AS PER SCREENSHOT -->
-                                <div class="mt-4 pt-4 border-t border-slate-100">
-                                    <a href="#" class="group/cta flex items-center justify-between p-4 bg-blue-50/40 hover:bg-blue-600 rounded-xl transition-all duration-300">
-                                        <span class="text-[10px] font-black text-blue-700 group-hover/cta:text-white uppercase tracking-widest">Enterprise Consult</span>
-                                        <i class="fas fa-arrow-right text-[10px] text-blue-400 group-hover/cta:text-white transition-transform group-hover/cta:translate-x-1"></i>
-                                    </a>
-                                </div>
+                            </div>
+                            <div class="bg-slate-50 p-5 border-t border-slate-100">
+                                <a href="contact" target="_blank"  class="text-[10px] font-black text-blue-700 uppercase tracking-widest flex items-center justify-between">
+                                    Enterprise Consult <i class="fas fa-arrow-right"></i>
+                                </a>
                             </div>
                         </div>
-                        <!-- MEGA MENU END -->
                     </div>
 
-                    <a href="#contact" class="btn-premium bg-slate-900 text-white px-8 py-3 rounded-xl font-bold text-[11px] tracking-[0.2em] shadow-lg">PARTNER WITH US</a>
+                    <a href="contact" target="_blank" class="btn-premium bg-slate-900 text-white px-8 py-3 rounded-xl font-bold text-[11px] tracking-[0.2em] shadow-lg">PARTNER WITH US</a>
                 </div>
 
+                <!-- Mobile Menu Button -->
                 <div class="lg:hidden flex items-center">
                     <button id="menu-btn" class="text-slate-900 p-2 bg-slate-100 rounded-lg">
                         <i class="fas fa-bars-staggered text-xl"></i>
                     </button>
                 </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-slate-100 p-4 space-y-2 pb-8 overflow-y-auto max-h-screen">
+            <a href="https://www.techgrid-systems.org.uk" class="block p-4 text-[11px] font-black text-slate-500 uppercase tracking-[0.15em] hover:bg-slate-50 rounded-xl">Home</a>
+            
+            <!-- Mobile About -->
+            <button onclick="toggleAccordion('mob-about-panel', 'about-icon-main')" class="w-full flex items-center justify-between p-4 text-[11px] font-black text-slate-500 uppercase tracking-[0.15em] hover:bg-slate-50 rounded-xl">
+                About <i id="about-icon-main" class="fas fa-chevron-down rotate-icon text-[10px] transition-transform"></i>
+            </button>
+            <div id="mob-about-panel" class="accordion-content px-4 space-y-2">
+                <a href="about" class="block py-2 text-xs font-semibold text-slate-600">About Us</a>
+            </div>
+
+            <a href="our-people" class="text-slate-500 hover:text-blue-700 font-bold text-[11px] tracking-[0.15em] transition-colors uppercase">Meet the Team</a>
+
+            <!-- Mobile Insights -->
+            <button onclick="toggleAccordion('mob-insights-panel', 'insights-icon-main')" class="w-full flex items-center justify-between p-4 text-[11px] font-black text-slate-500 uppercase tracking-[0.15em] hover:bg-slate-50 rounded-xl">
+                Insights <i id="insights-icon-main" class="fas fa-chevron-down rotate-icon text-[10px] transition-transform"></i>
+            </button>
+            <div id="mob-insights-panel" class="accordion-content px-4 space-y-2">
+                <a href="#" class="block py-2 text-xs font-semibold text-slate-600">Blog</a>
+                <a href="#" class="block py-2 text-xs font-semibold text-slate-600">Case Studies</a>
+            </div>
+            
+            <!-- Mobile Solutions -->
+            <button onclick="toggleAccordion('mobile-solutions-panel', 'sol-icon-main')" class="w-full flex items-center justify-between p-4 text-[11px] font-black text-slate-500 uppercase tracking-[0.15em] hover:bg-slate-50 rounded-xl">
+                Solutions <i id="sol-icon-main" class="fas fa-chevron-down rotate-icon text-[10px] transition-transform"></i>
+            </button>
+            <div id="mobile-solutions-panel" class="accordion-content px-2 space-y-2">
+                <div class="bg-white border border-slate-200 shadow-sm rounded-2xl overflow-hidden mt-2">
+                    <div class="p-3 space-y-1">
+                        <!-- Connectivity -->
+                        <div class="border-b border-slate-50 last:border-0 pb-1">
+                            <button onclick="toggleAccordion('mob-net-inner', 'mob-net-icon')" class="w-full flex items-center justify-between p-3 hover:bg-slate-50 rounded-xl transition-colors">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-6 h-6 bg-blue-50 text-blue-700 rounded flex items-center justify-center">
+                                        <i class="fas fa-project-diagram text-[10px]"></i>
+                                    </div>
+                                    <span class="text-[10px] font-black text-slate-800 tracking-widest uppercase">Connectivity</span>
+                                </div>
+                                <i id="mob-net-icon" class="fas fa-chevron-down rotate-icon text-[10px] text-slate-300"></i>
+                            </button>
+                            <div id="mob-net-inner" class="accordion-content pl-12 pr-4">
+                                <ul class="space-y-2 mt-2 text-xs text-slate-500 font-semibold">
+                                    <li><a href="#" class="block">SD-WAN Architecture</a></li>
+                                    <li><a href="#" class="block">Private Fiber Uplinks</a></li>
+                                    <li><a href="#" class="block">Enterprise Wireless</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- Infrastructure -->
+                        <div class="border-b border-slate-50 last:border-0 pb-1">
+                            <button onclick="toggleAccordion('mob-infra-inner', 'mob-infra-icon')" class="w-full flex items-center justify-between p-3 hover:bg-slate-50 rounded-xl transition-colors">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-6 h-6 bg-slate-100 text-slate-700 rounded flex items-center justify-center">
+                                        <i class="fas fa-server text-[10px]"></i>
+                                    </div>
+                                    <span class="text-[10px] font-black text-slate-800 tracking-widest uppercase">Infrastructure</span>
+                                </div>
+                                <i id="mob-infra-icon" class="fas fa-chevron-down rotate-icon text-[10px] text-slate-300"></i>
+                            </button>
+                            <div id="mob-infra-inner" class="accordion-content pl-12 pr-4">
+                                <ul class="space-y-2 mt-2 text-xs text-slate-500 font-semibold">
+                                    <li><a href="#" class="block">Data Center Design</a></li>
+                                    <li><a href="#" class="block">Access Control Systems</a></li>
+                                    <li><a href="#" class="block">Intelligent Workspace</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- Managed Ops (Integrated from Desktop) -->
+                        <div class="border-b border-slate-50 last:border-0 pb-1">
+                            <button onclick="toggleAccordion('mob-support-inner', 'mob-support-icon')" class="w-full flex items-center justify-between p-3 hover:bg-slate-50 rounded-xl transition-colors">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-6 h-6 bg-blue-900 text-white rounded flex items-center justify-center">
+                                        <i class="fas fa-shield-alt text-[10px]"></i>
+                                    </div>
+                                    <span class="text-[10px] font-black text-slate-800 tracking-widest uppercase">Managed Ops</span>
+                                </div>
+                                <i id="mob-support-icon" class="fas fa-chevron-down rotate-icon text-[10px] text-slate-300"></i>
+                            </button>
+                            <div id="mob-support-inner" class="accordion-content pl-12 pr-4">
+                                <ul class="space-y-2 mt-2 text-xs text-slate-500 font-semibold">
+                                    <li><a href="#" class="block">24/7 Global NOC</a></li>
+                                    <li><a href="#" class="block">Cyber Governance</a></li>
+                                    <li><a href="#" class="block">vCTO Strategy</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-slate-50 p-4 border-t border-slate-100">
+                        <a href="contact" target="_blank" class="text-[10px] font-black text-blue-700 uppercase tracking-widest flex items-center justify-between">
+                            Enterprise Consult <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="pt-6">
+                <a href="contact" target="_blank" class="block w-full bg-slate-900 text-white text-center py-4 rounded-xl font-bold text-[11px] tracking-[0.2em] uppercase">Partner With Us</a>
             </div>
         </div>
     </nav>
